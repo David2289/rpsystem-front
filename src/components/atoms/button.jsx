@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button as MatButton } from 'reactstrap';
+import { Button as MatButton } from 'react-materialize';
 import { COLOR } from '../../utils/constants.js'
 
 const ButtonStyled = styled(MatButton)`
