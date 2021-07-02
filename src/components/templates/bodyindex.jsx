@@ -6,12 +6,12 @@ import Row from '../organism/row.jsx';
 import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
+import TextButton from '../atoms/textbutton.jsx'
 
 import { getStudents, fetchStudents } from '../../services/studentsService.js';
 
-const TdRight = styled.td`
-    text-align:right
-`;
+import PathIcForward from '../../icons/ic_forward.svg';
+
 
 
 const BodyIndex = () => {
@@ -49,7 +49,17 @@ const BodyIndex = () => {
                             <td>{student.fsurname + ' ' + student.lsurname}</td>
                             <td>{student.age}</td>
                             <td>{student.section}</td>
-                            <TdRight><Button>Edit</Button></TdRight>
+                            <td>
+                                <TextButton
+                                    href='/'
+                                    ic_path={PathIcForward}
+                                    ic_size='15px'
+                                    ic_align='right'
+                                    separation='5px'
+                                    float='right'>
+                                    See
+                                </TextButton>
+                            </td>
                             </tr>
                         ))}
                     </tbody>
