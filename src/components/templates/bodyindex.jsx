@@ -51,7 +51,7 @@ const BodyIndex = () => {
                             <td>{student.section}</td>
                             <td>
                                 <TextButton
-                                    href='/'
+                                    href={`/${student.id}`}
                                     ic_path={PathIcForward}
                                     ic_size='15px'
                                     ic_align='right'

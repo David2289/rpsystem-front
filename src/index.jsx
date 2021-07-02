@@ -33,13 +33,13 @@ const elements = (
                     <BodyIndex/>
                 </Route>
 
-                {/* <Route 
-                    path='/nosotros'>
+                <Route 
+                    path='/:id'>
                     <Header selected={LABEL.us}/>
-                    <BodyUs/>
+                    {/* <BodyUs/> */}
                 </Route>
 
-                <Route 
+                {/* <Route 
                     path='/contact'>
                     <Header selected={LABEL.contact}/>
                     <BodyContact/>
