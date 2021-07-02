@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Col, Table } from 'react-materialize';
-import styled from 'styled-components';
 import { COLOR, SIZE, SCREEN_MEDIA } from '../../utils/constants.js';
 import Row from '../organism/row.jsx';
 import Button from '../atoms/button.jsx';
@@ -8,7 +7,7 @@ import Divider from '../atoms/divider.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
 import TextButton from '../atoms/textbutton.jsx'
 
-import { getStudents, fetchStudents } from '../../services/studentsService.js';
+import { getStudents } from '../../services/studentsService.js';
 
 import PathIcForward from '../../icons/ic_forward.svg';
 

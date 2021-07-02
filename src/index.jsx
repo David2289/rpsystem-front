@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/organism/header.jsx';
 import Footer from './components/organism/footer.jsx';
 import BodyIndex from './components/templates/bodyindex.jsx';
+import BodyProfile from './components/templates/bodyprofile.jsx';
 import { Root } from './utils/global.js';
 import { LABEL } from './utils/constants.js';
 import { 
@@ -36,7 +37,7 @@ const elements = (
                 <Route 
                     path='/:id'>
                     <Header selected={LABEL.us}/>
-                    {/* <BodyUs/> */}
+                    <BodyProfile/>
                 </Route>
 
                 {/* <Route 
