@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Col, Table } from 'reactstrap';
+import { Container, Col, Table } from 'react-materialize';
 import styled from 'styled-components';
 import { COLOR, SIZE, SCREEN_MEDIA } from '../../utils/constants.js';
 import Row from '../organism/row.jsx';
