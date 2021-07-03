@@ -8,6 +8,7 @@ import { COLOR, SIZE } from '../../utils/constants.js';
 import TitleSect from '../atoms/titlesect.jsx';
 import Divider from '../atoms/divider.jsx';
 import { LabelSailecMedium, LabelSailecRegular } from '../atoms/label.jsx';
+import { calculateAge } from '../../utils/dates.js';
 
 import { getStudentById } from '../../services/studentsService.js';
 
@@ -30,13 +31,6 @@ const Desc = styled(LabelSailecRegular)`
     font-size: ${SIZE.subtitle};
     color: ${COLOR.secondary};
 `;
-
-function _calculateAge(birth) {
-    var birthDate = new Date(birth);
-    var ageDif = Date.now() - birthDate;
-    var ageDate = new Date(ageDif);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
 
 
 const BodyProfile = () => {
@@ -111,7 +105,7 @@ const BodyProfile = () => {
                             <Subtitle>Edad</Subtitle>
                         </li>
                         <li>
-                            <Desc>{ _calculateAge(student.birth) }</Desc>
+                            <Desc>{ calculateAge(student.birth) }</Desc>
                         </li>
                         <li><Divider margin='25px 0'/></li>
                         <li>

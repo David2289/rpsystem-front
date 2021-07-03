@@ -6,6 +6,7 @@ import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
 import TextButton from '../atoms/textbutton.jsx'
+import { calculateAge } from '../../utils/dates.js';
 
 import { getStudents } from '../../services/studentsService.js';
 
@@ -44,9 +45,9 @@ const BodyIndex = () => {
                     <tbody>
                         {students && students.map((student, index) => (
                             <tr key={index}>
-                            <td>{student.fname + student.mname}</td>
+                            <td>{student.fname + ' ' + student.mname}</td>
                             <td>{student.fsurname + ' ' + student.lsurname}</td>
-                            <td>{student.age}</td>
+                            <td>{ calculateAge(student.birth) }</td>
                             <td>{student.section}</td>
                             <td>
                                 <TextButton
