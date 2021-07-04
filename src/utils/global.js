@@ -20,12 +20,37 @@ const Root = createGlobalStyle`
         background: ${COLOR.background};
     }
 
-    // To change material Text Input
-    .input-field.input-outlined {
-        > input, .materialize-textarea {
-            border: 1px solid ${COLOR.grayClear};
+    .btn, .btn-large {
+        color: ${COLOR.black};
+        background-color: ${COLOR.primary};
+        border: none;
+        text-transform: none;
+        &:hover {
+            color: ${COLOR.white};
+            background-color: ${COLOR.primaryDark};
+            svg { fill: ${COLOR.white}; }
+        }
+        &:focus {
+            color: ${COLOR.white};
+            background-color: ${COLOR.primaryDark};
+        }
+    }
+
+    // To change select options text color
+    ul.dropdown-content.select-dropdown li span {
+        color: ${COLOR.black}; /* no need for !important :) */
+    }
+
+    .input-field.col {
+        width: 100%;
+        margin: 0 0;
+        padding: 0 0;
+        > input, textarea, .select-wrapper > input {
+            font-family: 'Sailec Light';
+            font-size: 15px;
+            border: 1px solid ${COLOR.gray};
             padding: 0 16px;
-            background: ${COLOR.white};
+            background: none;
             // Avoid width overflow 
             width: 100%;
             -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -47,19 +72,6 @@ const Root = createGlobalStyle`
         .materialize-textarea {
             padding: 16px;
             height: 200px;
-        }
-        > label {
-            color: ${COLOR.gray};
-            left: 27px;
-            display: inline-flex;
-            width: auto !important;
-            &.active {
-                background: ${COLOR.background};
-                border-left: 4px solid ${COLOR.background};
-                border-right: 4px solid ${COLOR.background};
-                transform: translateY(-1.75rem);
-                top: 1rem;
-            }
         }
     }
 

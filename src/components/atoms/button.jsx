@@ -7,22 +7,7 @@ import SVG from 'react-inlinesvg';
 
 
 const ButtonStyled = styled(MatButton)`
-    color: ${COLOR.black};
-    background-color: ${COLOR.primary};
-    border: none;
-    text-transform: none;
     margin: ${props => props.margin ? props.margin : '0 0'};
-    &:hover {
-        color: ${COLOR.white};
-        background-color: ${COLOR.primaryDark};
-        svg {
-            fill: ${COLOR.white};
-        }
-    }
-    &:focus {
-        color: ${COLOR.white};
-        background-color: ${COLOR.primaryDark};
-    }
 `;
 
 const Icon = styled(SVG)`

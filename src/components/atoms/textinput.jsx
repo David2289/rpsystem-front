@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { TextInput as MatTextInput } from 'react-materialize';
 
 const Content = styled.div`
     margin: ${props => props.margin ? props.margin : '0 0'};
@@ -9,9 +10,8 @@ const Content = styled.div`
 const TextInput = (props) => {
     return (
         <Content 
-            className='input-field input-outlined' 
             margin={props.margin}>
-            <input 
+            <MatTextInput 
                 id={props.id} 
                 type={props.type}
                 placeholder={props.placeholder} />
