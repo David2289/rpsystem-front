@@ -20,6 +20,9 @@ const Root = createGlobalStyle`
         background: ${COLOR.background};
     }
 
+
+    // ******  BUTTONS  ******
+
     .btn, .btn-large {
         color: ${COLOR.black};
         background-color: ${COLOR.primary};
@@ -35,6 +38,16 @@ const Root = createGlobalStyle`
             background-color: ${COLOR.primaryDark};
         }
     }
+    .modal.open {
+        .modal-footer {
+            .btn {
+                margin: 0 8px;
+            }
+        }
+    }
+
+
+    // ******  INPUTS  ******
 
     // To change select options text color
     ul.dropdown-content.select-dropdown li span {

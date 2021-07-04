@@ -1,22 +1,22 @@
 import { createGlobalStyle } from 'styled-components';
 
-import SailecRegular from './sailec-regular-webfont.woff';
-import SailecRegular2 from './sailec-regular-webfont.woff2';
+import SailecRegular from '../fonts/sailec-regular-webfont.woff';
+import SailecRegular2 from '../fonts/sailec-regular-webfont.woff2';
 
-import SailecMedium from './sailec-medium-webfont.woff';
-import SailecMedium2 from './sailec-medium-webfont.woff2';
+import SailecMedium from '../fonts/sailec-medium-webfont.woff';
+import SailecMedium2 from '../fonts/sailec-medium-webfont.woff2';
 
-import SailecBold from './sailec-bold-webfont.woff';
-import SailecBold2 from './sailec-bold-webfont.woff2';
+import SailecBold from '../fonts/sailec-bold-webfont.woff';
+import SailecBold2 from '../fonts/sailec-bold-webfont.woff2';
 
-import SailecLight from './sailec-light-webfont.woff';
-import SailecLight2 from './sailec-light-webfont.woff2';
+import SailecLight from '../fonts/sailec-light-webfont.woff';
+import SailecLight2 from '../fonts/sailec-light-webfont.woff2';
 
-import HarmonyRegular from './instantharmonydemo-webfont.woff';
-import HarmonyRegular2 from './instantharmonydemo-webfont.woff2';
+import HarmonyRegular from '../fonts/instantharmonydemo-webfont.woff';
+import HarmonyRegular2 from '../fonts/instantharmonydemo-webfont.woff2';
 
-import HarmonyLite from './instantharmonydemo_lite-webfont.woff';
-import HarmonyLite2 from './instantharmonydemo_lite-webfont.woff2';
+import HarmonyLite from '../fonts/instantharmonydemo_lite-webfont.woff';
+import HarmonyLite2 from '../fonts/instantharmonydemo_lite-webfont.woff2';
 
 
 const FontSailecRegular = createGlobalStyle`

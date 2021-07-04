@@ -94,6 +94,7 @@ const BodyIndex = () => {
                 {/* ****** MODAL ****** */}
                 <Modal
                     actions={[
+                    <Button onTapped={() => { modal.close() }}>Add</Button>,
                     <Button onTapped={() => { modal.close() }}>Close</Button>
                     ]}
                     bottomSheet={false}
@@ -116,16 +117,19 @@ const BodyIndex = () => {
                     <Row margin='0 0'>
                         <Col s={12} m={12} l={4} xl={4}>
                             <TextInput 
+                                id='fname'
                                 type='text' 
                                 placeholder='Primer nombre'/>
                         </Col>
                         <Col s={12} m={12} l={4} xl={4}>
                             <TextInput 
+                                id='mname'
                                 type='text' 
                                 placeholder='Segundo nombre'/>
                         </Col>
                         <Col s={12} m={12} l={4} xl={4}>
                             <TextInput 
+                                id='lname'
                                 type='text' 
                                 placeholder='Tercer nombre'/>
                         </Col>
@@ -136,11 +140,13 @@ const BodyIndex = () => {
                     <Row margin='0 0'>
                         <Col s={12} m={12} l={6} xl={6}>
                             <TextInput 
+                                id='fsurname'
                                 type='text' 
                                 placeholder='Primer apellido'/>
                         </Col>
                         <Col s={12} m={12} l={6} xl={6}>
                             <TextInput 
+                                id='lsurname'
                                 type='text' 
                                 placeholder='Segundo apellido'/>
                         </Col>
@@ -151,6 +157,7 @@ const BodyIndex = () => {
                     <Row margin='0 0'>
                         <Col s={12} m={12} l={6} xl={6}>
                             <TextInput 
+                                id='email'
                                 type='email' 
                                 placeholder='email'/>
                         </Col>
@@ -189,7 +196,7 @@ const BodyIndex = () => {
                                 disableWeekends: false,
                                 events: [],
                                 firstDay: 0,
-                                format: 'mmm dd, yyyy',
+                                format: 'dd mmm, yyyy',
                                 i18n: {
                                 cancel: 'Cancel',
                                 clear: 'Clear',
@@ -208,8 +215,7 @@ const BodyIndex = () => {
                                 showDaysInNextAndPreviousMonths: false,
                                 showMonthAfterYear: false,
                                 yearRange: 10
-                            }}
-                            />
+                            }}/>
                         </Col>
                     </Row>
                     <Row margin='15px 0 0 0'>
@@ -218,6 +224,7 @@ const BodyIndex = () => {
                     <Row margin='0 0'>
                         <Col s={12} m={12} l={12} xl={12}>
                             <TextArea 
+                                id='observation'
                                 placeholder='Observations'/>
                         </Col>
                     </Row>
