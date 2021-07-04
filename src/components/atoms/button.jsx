@@ -13,18 +13,21 @@ const ButtonStyled = styled(MatButton)`
     text-transform: none;
     margin: ${props => props.margin ? props.margin : '0 0'};
     &:hover {
-        color: ${COLOR.background};
+        color: ${COLOR.white};
         background-color: ${COLOR.primaryDark};
+        svg {
+            fill: ${COLOR.white};
+        }
     }
     &:focus {
-        color: ${COLOR.background};
+        color: ${COLOR.white};
         background-color: ${COLOR.primaryDark};
     }
 `;
 
 const Icon = styled(SVG)`
     fill: ${COLOR.black};
-    margin: 0 12px;
+    margin: 0 12px 0 0;
     height: 12px;
 `;
 

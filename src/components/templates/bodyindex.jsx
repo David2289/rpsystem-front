@@ -11,6 +11,7 @@ import Button from '../atoms/button.jsx';
 import { getStudents } from '../../services/studentsService.js';
 
 import PathIcForward from '../../icons/ic_forward.svg';
+import PathIcAdd from '../../icons/ic_add.svg';
 
 
 const ButtonContent = styled.div`
@@ -79,7 +80,7 @@ const BodyIndex = () => {
             </Row>
             <Row margin='40px 0 80px 0'>
                 <ButtonContent>
-                    <Button onTapped={() => { modal.open() }} ic_path={PathIcForward}>Add</Button>
+                    <Button onTapped={() => { modal.open() }} ic_path={PathIcAdd}>Add</Button>
                 </ButtonContent>
                 <Modal
                     actions={[

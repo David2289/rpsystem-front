@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import SVG from 'react-inlinesvg';
 import { SIZE, COLOR } from '../../utils/constants.js';
 import { LabelSailecRegular } from '../atoms/label.jsx'
 
 
 const AContent = styled.a`
-    // To avoid purple padding:
+    // To avoid purple padding it's necesary display flex in the content.
     display: flex;
     float: ${props => props.float ? props.float : 'left'};
 `;
@@ -16,6 +17,13 @@ const IconContent = styled.div`
     height: ${props => props.ic_size ? props.ic_size : '25px'};
     margin-left: ${props => props.separation ? props.separation : '15px'};
     margin-right: ${props => props.separation ? props.separation : '15px'};
+`;
+
+const SVGStyled = styled(SVG)`
+    height: 100%;
+    width: 100%;
+    display: block;
+    fill: ${props => props.ic_color ? props.ic_color : 'none'};
 `;
 
 const Icon = styled.img`
@@ -35,11 +43,23 @@ const TextButton = (props) => {
     
     const icAlign = props.ic_align ? props.ic_align : 'left';
     
-    const icContent = 
+    const icContent = props.ic_color ? 
         <IconContent
             ic_size={props.ic_size}
             separation={props.separation} >
-            <Icon src={props.ic_path}/>
+            <SVGStyled 
+                src={props.ic_path}
+                ic_color={props.ic_color}
+                />
+        </IconContent>
+        :
+        <IconContent
+            ic_size={props.ic_size}
+            separation={props.separation} >
+            <Icon 
+                src={props.ic_path}
+                ic_color={props.ic_color}
+                />
         </IconContent>;
     
     const label = 
@@ -78,6 +98,7 @@ const TextButton = (props) => {
 
 TextButton.propTypes = {
     ic_path: PropTypes.string,
+    ic_color: PropTypes.string,
     ic_size: PropTypes.string,
     ic_align: PropTypes.string,
     title_color: PropTypes.string,
