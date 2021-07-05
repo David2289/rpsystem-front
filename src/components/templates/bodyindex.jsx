@@ -214,7 +214,7 @@ const BodyIndex = () => {
                                 showClearBtn: false,
                                 showDaysInNextAndPreviousMonths: false,
                                 showMonthAfterYear: false,
-                                yearRange: 10
+                                yearRange: 30
                             }}/>
                         </Col>
                     </Row>

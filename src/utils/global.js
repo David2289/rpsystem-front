@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { COLOR } from '../utils/constants.js';
+import { COLOR, SIZE } from '../utils/constants.js';
 
 const Root = createGlobalStyle`
     * {
@@ -60,7 +60,7 @@ const Root = createGlobalStyle`
         padding: 0 0;
         > input, textarea, .select-wrapper > input {
             font-family: 'Sailec Light';
-            font-size: 15px;
+            font-size: 14px;
             border: 1px solid ${COLOR.gray};
             padding: 0 16px;
             background: none;
@@ -72,7 +72,7 @@ const Root = createGlobalStyle`
             //
             float: none;
             display: block;
-            border-radius: 4px;
+            border-radius: ${SIZE.inp_radious};
             transition: box-shadow, border-color 0.25s;
             &:focus:not([readonly]) {
                 border-color: ${COLOR.gray};
@@ -86,6 +86,32 @@ const Root = createGlobalStyle`
             padding: 16px;
             height: 200px;
         }
+    }
+
+
+    // ******  DATE PICKER  ******
+    .datepicker-date-display {
+        background-color: ${COLOR.primaryDark}
+    }
+    .datepicker-day-button:focus {
+        color: white !important;
+        background-color: ${COLOR.primaryClear}
+    }
+    .datepicker-done,
+    .datepicker-cancel,
+    .select-dropdown li>span,
+    .is-today {
+        color: ${COLOR.gold} !important
+    }
+    td.is-selected,
+    .month-prev:active,
+    .month-prev:focus,
+    .month-next:active,
+    .month-next:focus {
+        background-color: ${COLOR.primaryDark} !important
+    }
+    td.is-selected.is-today {
+        color: white !important
     }
 
 `;
