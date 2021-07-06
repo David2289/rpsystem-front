@@ -37,11 +37,11 @@ const submitStudent = () => {
         email: $('#email')[0].value ? $('#email')[0].value : '',
         sex: $('#sex')[0].value ? $('#sex')[0].value : '',
         birth: $('#birth')[0].value ? getDate($('#birth')[0].value, 'yyyy-MM-dd') : '',
-        section: '',
+        section: $('#section')[0].value ? $('#section')[0].value : '',
         observation: $('#observation')[0].value ? $('#observation')[0].value : ''
     }
     console.log(student);
-    createStudent(student)
+    createStudent(student);
 }
 
 
@@ -111,7 +111,11 @@ const BodyIndex = () => {
                 {/* ****** MODAL ****** */}
                 <Modal
                     actions={[
-                    <Button onTapped={() => submitStudent() }>Add</Button>,
+                    <Button onTapped={() => { 
+                        submitStudent();
+                        modal.close(); } }>
+                        Add
+                    </Button>,
                     <Button onTapped={() => { modal.close() }}>Close</Button>
                     ]}
                     bottomSheet={false}
@@ -172,38 +176,7 @@ const BodyIndex = () => {
                         <ModalSubtitle>Extras</ModalSubtitle>
                     </Row>
                     <Row margin='0 0'>
-                        <Col s={12} m={12} l={6} xl={6}>
-                            <TextInput 
-                                id='email'
-                                type='email' 
-                                placeholder='email'/>
-                        </Col>
-                        <Col s={12} m={12} l={3} xl={3}>
-                            {/* ****** SELECT ****** */}
-                            <Select
-                                id="sex"
-                                multiple={false}
-                                onChange={function noRefCheck(){}}
-                                options={{
-                                    classes: '',
-                                    dropdownOptions: {
-                                    alignment: 'left',
-                                    autoTrigger: true,
-                                    closeOnClick: true,
-                                    constrainWidth: true,
-                                    coverTrigger: true,
-                                    hover: false,
-                                    inDuration: 150,
-                                    outDuration: 250
-                                    }
-                                }}
-                                value="">
-                                <option disabled value="">Sex</option>
-                                <option value="m">Masculino</option>
-                                <option value="f">Femenino</option>
-                            </Select>
-                        </Col>
-                        <Col s={12} m={12} l={3} xl={3}>
+                        <Col s={12} m={12} l={4} xl={4}>
                             {/* ****** DATEPICKER ****** */}
                             <DatePicker
                             id='birth'
@@ -234,8 +207,68 @@ const BodyIndex = () => {
                                 yearRange: 30
                             }}/>
                         </Col>
+                        <Col s={12} m={12} l={4} xl={4}>
+                            {/* ****** SELECT SEX ****** */}
+                            <Select
+                                id="sex"
+                                multiple={false}
+                                onChange={function noRefCheck(){}}
+                                options={{
+                                    classes: '',
+                                    dropdownOptions: {
+                                    alignment: 'left',
+                                    autoTrigger: true,
+                                    closeOnClick: true,
+                                    constrainWidth: true,
+                                    coverTrigger: true,
+                                    hover: false,
+                                    inDuration: 150,
+                                    outDuration: 250
+                                    }
+                                }}
+                                value="">
+                                <option disabled value="">Sex</option>
+                                <option value="m">Masculino</option>
+                                <option value="f">Femenino</option>
+                            </Select>
+                        </Col>
+                        <Col s={12} m={12} l={4} xl={4}>
+                            {/* ****** SELECT SECTION ****** */}
+                            <Select
+                                id="section"
+                                multiple={false}
+                                onChange={function noRefCheck(){}}
+                                options={{
+                                    classes: '',
+                                    dropdownOptions: {
+                                    alignment: 'left',
+                                    autoTrigger: true,
+                                    closeOnClick: true,
+                                    constrainWidth: true,
+                                    coverTrigger: true,
+                                    hover: false,
+                                    inDuration: 150,
+                                    outDuration: 250
+                                    }
+                                }}
+                                value="">
+                                <option disabled value="">Section</option>
+                                <option value="primary">Primary</option>
+                                <option value="secondary">Secondary</option>
+                            </Select>
+                        </Col>
                     </Row>
-                    <Row margin='15px 0 0 0'>
+
+                    <Row margin='10px 0 0 0'>
+                        <Col s={12} m={12} l={6} xl={6}>
+                            <TextInput 
+                                id='email'
+                                type='email' 
+                                placeholder='email'/>
+                        </Col>
+                    </Row>
+                    
+                    <Row margin='10px 0 0 0'>
                         <ModalSubtitle>Observations</ModalSubtitle>
                     </Row>
                     <Row margin='0 0'>

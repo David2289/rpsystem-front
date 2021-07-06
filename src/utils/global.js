@@ -100,7 +100,12 @@ const Root = createGlobalStyle`
     .datepicker-done,
     .datepicker-cancel,
     .select-dropdown li>span,
-    .is-today {
+    .datepicker-row {
+        .is-today {
+            color: ${COLOR.gold} !important
+        }
+    }
+    .btn-flat.datepicker-cancel.waves-effect, .btn-flat.datepicker-done.waves-effect {
         color: ${COLOR.gold} !important
     }
     td.is-selected,
