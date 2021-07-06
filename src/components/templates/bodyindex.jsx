@@ -8,10 +8,10 @@ import Row from '../organism/row.jsx';
 import TextButton from '../atoms/textbutton.jsx'
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
-import { calculateAge } from '../../utils/dates.js';
+import { calculateAge, getDate } from '../../utils/dates.js';
 import { LabelSailecRegular } from '../atoms/label.jsx';
 
-import { getStudents } from '../../services/studentsService.js';
+import { getStudents, createStudent } from '../../services/studentsService.js';
 
 import PathIcForward from '../../icons/ic_forward.svg';
 import PathIcAdd from '../../icons/ic_add.svg';
@@ -26,6 +26,23 @@ const ModalSubtitle = styled(LabelSailecRegular)`
     font-size: ${SIZE.body};
     color: ${COLOR.secondary};
 `;
+
+const submitStudent = () => {
+    const student = {
+        fname: $('#fname')[0].value ? $('#fname')[0].value : '',
+        mname: $('#mname')[0].value ? $('#mname')[0].value : '',
+        lname: $('#lname')[0].value ? $('#lname')[0].value : '',
+        fsurname: $('#fsurname')[0].value ? $('#fsurname')[0].value : '',
+        lsurname: $('#lsurname')[0].value ? $('#lsurname')[0].value : '',
+        email: $('#email')[0].value ? $('#email')[0].value : '',
+        sex: $('#sex')[0].value ? $('#sex')[0].value : '',
+        birth: $('#birth')[0].value ? getDate($('#birth')[0].value, 'yyyy-MM-dd') : '',
+        section: '',
+        observation: $('#observation')[0].value ? $('#observation')[0].value : ''
+    }
+    console.log(student);
+    createStudent(student)
+}
 
 
 const BodyIndex = () => {
@@ -94,7 +111,7 @@ const BodyIndex = () => {
                 {/* ****** MODAL ****** */}
                 <Modal
                     actions={[
-                    <Button onTapped={() => { modal.close() }}>Add</Button>,
+                    <Button onTapped={() => submitStudent() }>Add</Button>,
                     <Button onTapped={() => { modal.close() }}>Close</Button>
                     ]}
                     bottomSheet={false}
@@ -164,7 +181,7 @@ const BodyIndex = () => {
                         <Col s={12} m={12} l={3} xl={3}>
                             {/* ****** SELECT ****** */}
                             <Select
-                                id="Select-9"
+                                id="sex"
                                 multiple={false}
                                 onChange={function noRefCheck(){}}
                                 options={{
@@ -182,14 +199,14 @@ const BodyIndex = () => {
                                 }}
                                 value="">
                                 <option disabled value="">Sex</option>
-                                <option value="1">Masculino</option>
-                                <option value="2">Femenino</option>
+                                <option value="m">Masculino</option>
+                                <option value="f">Femenino</option>
                             </Select>
                         </Col>
                         <Col s={12} m={12} l={3} xl={3}>
                             {/* ****** DATEPICKER ****** */}
                             <DatePicker
-                            id='DatePicker-5'
+                            id='birth'
                             placeholder='Birthday'
                             options={{
                                 autoClose: false,
