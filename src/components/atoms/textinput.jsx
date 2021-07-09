@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { TextInput as MatTextInput } from 'react-materialize';
 
 const Content = styled.div`
+    display: flex;
     margin: ${props => props.margin ? props.margin : '0 0'};
 `;
 

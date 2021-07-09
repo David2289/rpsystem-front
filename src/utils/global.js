@@ -24,19 +24,7 @@ const Root = createGlobalStyle`
     // ******  BUTTONS  ******
 
     .btn, .btn-large {
-        color: ${COLOR.black};
-        background-color: ${COLOR.primary};
-        border: none;
         text-transform: none;
-        &:hover {
-            color: ${COLOR.white};
-            background-color: ${COLOR.primaryDark};
-            svg { fill: ${COLOR.white}; }
-        }
-        &:focus {
-            color: ${COLOR.white};
-            background-color: ${COLOR.primaryDark};
-        }
     }
     .modal.open {
         .modal-footer {

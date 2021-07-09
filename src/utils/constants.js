@@ -11,7 +11,8 @@ const COLOR = {
     black: '#333333',
     gray: '#999999',
     grayDark: '#777777',
-    grayClear: '#EDEDED'
+    grayClear: '#EDEDED',
+    red: '#FF6961'
 }
 
 const SIZE = {

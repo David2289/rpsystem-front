@@ -105,18 +105,33 @@ const BodyIndex = () => {
             </Row>
             <Row margin='40px 0 80px 0'>
                 <ButtonContent>
-                    <Button onTapped={() => { modal.open() }} ic_path={PathIcAdd}>Add</Button>
+                    <Button 
+                        onTapped={() => { modal.open() }} 
+                        ic_path={PathIcAdd}
+                        bg_color={COLOR.primary}
+                        text_color={COLOR.black}>
+                        Add
+                    </Button>
                 </ButtonContent>
 
                 {/* ****** MODAL ****** */}
                 <Modal
                     actions={[
-                    <Button onTapped={() => { 
-                        submitStudent();
-                        modal.close(); } }>
-                        Add
+                    <Button 
+                        onTapped={() => { modal.close() }}
+                        bg_color={COLOR.primary}
+                        float='right'>
+                        Close
                     </Button>,
-                    <Button onTapped={() => { modal.close() }}>Close</Button>
+                    <Button 
+                        onTapped={() => { 
+                            submitStudent();
+                            modal.close(); 
+                        } }
+                        bg_color={COLOR.primary}
+                        float='right'>
+                        Add
+                    </Button>
                     ]}
                     bottomSheet={false}
                     fixedFooter={false}
