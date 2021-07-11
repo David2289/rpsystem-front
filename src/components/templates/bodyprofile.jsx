@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import styled from 'styled-components';
-import { Container, Col, Table } from 'react-materialize';
+import { Container, Col } from 'react-materialize';
 import Row from '../organism/row.jsx';
+import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
 import { COLOR, SIZE } from '../../utils/constants.js';
 import TitleSect from '../atoms/titlesect.jsx';
 import Button from '../atoms/button.jsx';
-import TextButton from '../atoms/textbutton.jsx';
-import { LabelSailecMedium, LabelSailecRegular } from '../atoms/label.jsx';
+import Divider from '../atoms/divider.jsx';
 import { calculateAge } from '../../utils/dates.js';
 
 import { getStudentById } from '../../services/studentsService.js';
 
 import PathIcUser from '../../icons/ic_user.svg';
-import PathIcEdit from '../../icons/ic_edit.svg'
+import PathIcEdit from '../../icons/ic_edit.svg';
 
 
 const SVGStyled = styled(SVG)`
@@ -22,16 +22,6 @@ const SVGStyled = styled(SVG)`
     fill: ${COLOR.gray};
     display: block;
     margin: auto;
-`;
-
-const Subtitle = styled(LabelSailecMedium)`
-    font-size: ${SIZE.title};
-    color: ${COLOR.secondary};
-`;
-
-const Desc = styled(LabelSailecRegular)`
-    font-size: ${SIZE.subtitle};
-    color: ${COLOR.secondary};
 `;
 
 
@@ -75,82 +65,43 @@ const BodyProfile = () => {
                     <SVGStyled src={PathIcUser}></SVGStyled>
                 </Col>
                 <Col s={12} m={12} l={9} xl={9}>
-                    <Table>
-                        <tbody>
-                            <tr>
-                            <td>
-                                <Subtitle>Nombres</Subtitle>
-                                <Desc>
-                                    {student.fname 
+                    <CollectionItem
+                        header='Nombres'
+                        value={
+                            student.fname 
                                     + (student.mname && student.mname != '' ? ' ' + student.mname : '') 
                                     + (student.lname && student.lname != '' ? ' ' + student.lname : '')
-                                    }
-                                </Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                <Subtitle>Primer apellido</Subtitle>
-                                <Desc>
-                                    { student.fsurname && student.fsurname != '' ? ' ' + student.fsurname : '' }
-                                </Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                <Subtitle>Segundo apellido</Subtitle>
-                                <Desc>
-                                    { student.lsurname && student.lsurname != '' ? ' ' + student.lsurname : '' }
-                                </Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                <Subtitle>Edad</Subtitle>
-                                <Desc>{ calculateAge(student.birth) }</Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                <Subtitle>Email</Subtitle>
-                                <Desc>{ student.email && student.email != '' ? ' ' + student.email : '' }</Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                <Subtitle>Sección</Subtitle>
-                                <Desc>{ student.section && student.section != '' ? ' ' + student.section : '' }</Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                            <tr>
-                            <td>
-                                <Subtitle>Observaciones</Subtitle>
-                                <Desc>{ student.observation && student.observation != '' ? ' ' + student.observation : '' }</Desc>
-                            </td>
-                            <td>
-                                <TextButton ic_path={PathIcEdit} float='right' />
-                            </td>
-                            </tr>
-                        </tbody>
-                    </Table>
+                        }
+                        ic_path={ PathIcEdit }/>
+                    <Divider margin='15px 0 30px 0'/>
+                    <CollectionItem
+                        header='Primer apellido'
+                        value={ student.fsurname && student.fsurname != '' ? student.fsurname : '--' }
+                        ic_path={ PathIcEdit }/>
+                    <Divider margin='15px 0 30px 0'/>
+                    <CollectionItem
+                        header='Segundo apellido'
+                        value={ student.lsurname && student.lsurname != '' ? student.lsurname : '--' }
+                        ic_path={ PathIcEdit }/>
+                    <Divider margin='15px 0 30px 0'/>
+                    <CollectionItem
+                        header='Edad'
+                        value={ calculateAge(student.birth).toString() }/>
+                    <Divider margin='15px 0 30px 0'/>
+                    <CollectionItem
+                        header='Email'
+                        value={ student.email && student.email != '' ? student.email : '--' }
+                        ic_path={ PathIcEdit }/>
+                    <Divider margin='15px 0 30px 0'/>
+                    <CollectionItem
+                        header='Sección'
+                        value={ student.section && student.section != '' ? student.section : '--' }
+                        ic_path={ PathIcEdit }/>
+                    <Divider margin='15px 0 30px 0'/>
+                    <CollectionItem
+                        header='Observaciones'
+                        value={ student.observation && student.observation != '' ? student.observation : '--' }
+                        ic_path={ PathIcEdit }/>
                     
                 </Col>
             </Row>

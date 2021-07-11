@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-
+//* ******  <p>  ****** *//
 const LabelSailecRegular = styled.p`
     font-family: 'Sailec Regular';
     line-height: 2.2em;
@@ -27,11 +27,34 @@ const LabelHarmonyLite = styled.p`
 `;
 
 
+//* ******  <li>  ****** *//
+const LiSailecRegular = styled.li`
+    font-family: 'Sailec Regular';
+    line-height: 2.2em;
+`;
+
+const LiSailecMedium = styled.li`
+    font-family: 'Sailec Medium';
+`;
+
+const LiSailecBold = styled.li`
+    font-family: 'Sailec Bold';
+`;
+
+const LiSailecLight = styled.li`
+    font-family: 'Sailec Light';
+`;
+
+
 export {
     LabelSailecRegular, 
     LabelSailecMedium, 
     LabelSailecBold, 
     LabelSailecLight,
     LabelHarmonyRegular,
-    LabelHarmonyLite
+    LabelHarmonyLite, 
+    LiSailecRegular, 
+    LiSailecMedium, 
+    LiSailecBold, 
+    LiSailecLight
 }
