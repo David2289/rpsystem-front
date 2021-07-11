@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { COLOR, SIZE } from '../../utils/constants.js';
 import TextButton from '../atoms/textbutton.jsx';
-import { LabelSailecMedium, LiSailecMedium, LabelSailecRegular, LiSailecRegular } from '../atoms/label.jsx';
-import { nodeName } from 'jquery';
+import { LiSailecMedium, LabelSailecRegular } from '../atoms/label.jsx';
 
 
 const Li = styled(LiSailecMedium)`
@@ -35,7 +34,8 @@ const CollectionItem = (props) => {
         <TextButtonContent>
             <TextButton 
                 ic_path={props.ic_path} 
-                float='right'>
+                float='right'
+                onTapped={props.onIcTapped}>
             </TextButton>
         </TextButtonContent>
         :
@@ -58,7 +58,8 @@ const CollectionItem = (props) => {
 CollectionItem.propTypes = {
     header: PropTypes.string, 
     value: PropTypes.string, 
-    ic_path: PropTypes.string
+    ic_path: PropTypes.string, 
+    onIcTapped: PropTypes.func
 }
 
 export default CollectionItem;

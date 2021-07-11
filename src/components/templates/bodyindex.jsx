@@ -116,6 +116,9 @@ const BodyIndex = () => {
 
                 {/* ****** MODAL ****** */}
                 <Modal
+                    id="modal0"
+                    header="Add student"
+                    fixedFooter={true}
                     actions={[
                     <Button 
                         onTapped={() => { modal.close() }}
@@ -132,21 +135,7 @@ const BodyIndex = () => {
                         float='right'>
                         Add
                     </Button>
-                    ]}
-                    bottomSheet={false}
-                    fixedFooter={false}
-                    header="Add student"
-                    id="modal0"
-                    open={false}
-                    options={{
-                    dismissible: true,
-                    endingTop: '10%',
-                    inDuration: 250,
-                    opacity: 0.5,
-                    outDuration: 250,
-                    preventScrolling: true,
-                    startingTop: '4%'
-                    }}>
+                    ]}>
                     <Row margin='15px 0 0 0'>
                         <ModalSubtitle>Names</ModalSubtitle>
                     </Row>

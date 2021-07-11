@@ -9,7 +9,8 @@ import { LabelSailecRegular } from '../atoms/label.jsx'
 const AContent = styled.a`
     // To avoid purple padding it's necesary display flex in the content.
     display: flex;
-    float: ${props => props.float ? props.float : 'left'};
+    float: ${props => props.float ? props.float : 'left'}; 
+    cursor: pointer;
 `;
 
 const IconContent = styled.div`
@@ -88,7 +89,8 @@ const TextButton = (props) => {
                 className='valign-wrapper'
                 href={props.href}
                 target={props.target}
-                float={props.float}>
+                float={props.float}
+                onClick={props.onTapped}>
                 { icContent }
                 { label }
             </AContent>
@@ -106,7 +108,8 @@ TextButton.propTypes = {
     href: PropTypes.string,
     target: PropTypes.string,
     separation: PropTypes.string,
-    float: PropTypes.string
+    float: PropTypes.string, 
+    onTapped: PropTypes.func
 }
 
 export default TextButton;

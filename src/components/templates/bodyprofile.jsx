@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import $ from 'jquery'; 
 import { useParams } from 'react-router';
 import styled from 'styled-components';
-import { Container, Col } from 'react-materialize';
+import { Container, Col, Modal } from 'react-materialize';
 import Row from '../organism/row.jsx';
 import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
 import { COLOR, SIZE } from '../../utils/constants.js';
+import TextInput from '../atoms/textinput.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
 import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
@@ -44,7 +46,15 @@ const BodyProfile = () => {
         "observation": ""
     });
 
+    const [modalNames, setModalNames] = useState();
+
     useEffect(() => {
+        $(window).on('load', function(){
+            // ready method is deprecated
+            var auxModalNames = M.Modal.getInstance($('#modalNames')); // Init modal
+            setModalNames(auxModalNames);
+        });
+
         getStudentById(id).then(json => {
             if (json.error) {
                 console.log(error);
@@ -72,7 +82,53 @@ const BodyProfile = () => {
                                     + (student.mname && student.mname != '' ? ' ' + student.mname : '') 
                                     + (student.lname && student.lname != '' ? ' ' + student.lname : '')
                         }
-                        ic_path={ PathIcEdit }/>
+                        ic_path={ PathIcEdit }
+                        onIcTapped={ () => { modalNames.open() } }/>
+
+                    {/* ****** MODAL NAMES ****** */}
+                    <Modal
+                        id="modalNames"
+                        header="Names"
+                        actions={[
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { modalNames.close() } }>
+                                Close
+                            </Button>
+                        ]}>
+                        <Row margin='20px 0 10px 0'>
+                            <Col s={12}>
+                                <TextInput 
+                                    id='fname' 
+                                    name='fname'
+                                    type='text' 
+                                    placeholder='Primer nombre' 
+                                    value={student.fname}
+                                    onChange={() => {}}/>
+                            </Col>
+                        </Row>
+                        <Row margin='10px 0'>
+                            <Col s={12}>
+                                <TextInput 
+                                    id='mname' 
+                                    type='text' 
+                                    placeholder='Segundo nombre'
+                                    value={student.mname && student.mname != '' ? ' ' + student.mname : ''}
+                                    onChange={() => {}}/>
+                            </Col>
+                        </Row>
+                        <Row margin='10px 0'>
+                            <Col s={12}>
+                                <TextInput 
+                                    id='lname' 
+                                    type='text' 
+                                    placeholder='Tercer nombre'
+                                    value={student.lname && student.lname != '' ? ' ' + student.lname : ''}
+                                    onChange={() => {}}/>
+                            </Col>
+                        </Row>
+                    </Modal>
                     <Divider margin='15px 0 30px 0'/>
                     <CollectionItem
                         header='Primer apellido'
