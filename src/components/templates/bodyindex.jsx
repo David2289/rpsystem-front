@@ -217,20 +217,7 @@ const BodyIndex = () => {
                                 id="sex"
                                 multiple={false}
                                 onChange={function noRefCheck(){}}
-                                options={{
-                                    classes: '',
-                                    dropdownOptions: {
-                                    alignment: 'left',
-                                    autoTrigger: true,
-                                    closeOnClick: true,
-                                    constrainWidth: true,
-                                    coverTrigger: true,
-                                    hover: false,
-                                    inDuration: 150,
-                                    outDuration: 250
-                                    }
-                                }}
-                                value="">
+                                value=''>
                                 <option disabled value="">Sex</option>
                                 <option value="m">Masculino</option>
                                 <option value="f">Femenino</option>
@@ -242,20 +229,7 @@ const BodyIndex = () => {
                                 id="section"
                                 multiple={false}
                                 onChange={function noRefCheck(){}}
-                                options={{
-                                    classes: '',
-                                    dropdownOptions: {
-                                    alignment: 'left',
-                                    autoTrigger: true,
-                                    closeOnClick: true,
-                                    constrainWidth: true,
-                                    coverTrigger: true,
-                                    hover: false,
-                                    inDuration: 150,
-                                    outDuration: 250
-                                    }
-                                }}
-                                value="">
+                                value=''>
                                 <option disabled value="">Section</option>
                                 <option value="primary">Primary</option>
                                 <option value="secondary">Secondary</option>

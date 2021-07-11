@@ -15,7 +15,9 @@ const TextArea = (props) => {
             <MatTextArea 
                 id={props.id} 
                 placeholder={props.placeholder}
-                maxLength={props.length} />
+                maxLength={props.length}
+                value={props.value}
+                onChange={props.onChange} />
         </Content>
     );
 }
@@ -24,7 +26,9 @@ TextArea.propTypes = {
     id: PropTypes.string,
     placeholder: PropTypes.string,
     length: PropTypes.string, 
-    margin: PropTypes.string
+    margin: PropTypes.string, 
+    value: PropTypes.string, 
+    onChange: PropTypes.func 
 }
 
 export default TextArea;
