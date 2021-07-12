@@ -11,3 +11,7 @@ export const getStudentById = (id) => {
 export const createStudent = (student) => {
     return axios.post(`http://localhost:3000/api/students/create`, student);
 }
+
+export const updateStudent = (id, student) => {
+    return axios.post(`http://localhost:3000/api/students/update/${id}`, student);
+}

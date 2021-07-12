@@ -14,7 +14,7 @@ import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
 import { calculateAge } from '../../utils/dates.js';
 
-import { getStudentById } from '../../services/studentsService.js';
+import { getStudentById, updateStudent } from '../../services/studentsService.js';
 
 import PathIcUser from '../../icons/ic_user.svg';
 import PathIcEdit from '../../icons/ic_edit.svg';
@@ -44,27 +44,35 @@ const BodyProfile = () => {
 
     const { id } = useParams();
 
-    var [student, setStudent] = useState({
-        "id": 3,
-        "fname": "Username",
-        "mname": "",
-        "lname": "",
-        "fsurname": "Usersurname",
-        "lsurname": "",
-        "email": "",
-        "sex": "f",
-        "birth": "1969-02-22",
-        "regdate": "2021-06-29",
-        "section": "initial",
-        "observation": ""
+    const [student, setStudent] = useState({
+        'id': 1,
+        'fname': '',
+        'mname': '',
+        'lname': '',
+        'fsurname': '',
+        'lsurname': '',
+        'email': '',
+        'sex': '',
+        'birth': '',
+        'regdate': '',
+        'section': '',
+        'observation': ''
     });
 
+    /* MODALS */
     const [modalNames, setModalNames] = useState();
     const [modalSurnames, setModalSurnames] = useState();
     const [modalEmail, setModalEmail] = useState();
     const [modalSection, setModalSection] = useState();
     const [modalSex, setModalSex] = useState();
     const [modalObservation, setModalObservation] = useState();
+
+    //* INPUT VALUES */
+    const [fnameValue, setFnameValue] = useState({value: ''});
+    const [mnameValue, setMnameValue] = useState({value: ''});
+    const [lnameValue, setLnameValue] = useState({value: ''});
+    const [fsurnameValue, setFsurnameValue] = useState({value: ''});
+    const [lsurnameValue, setLsurnameValue] = useState({value: ''});
 
     useEffect(() => {
         $(window).on('load', function(){
@@ -88,7 +96,11 @@ const BodyProfile = () => {
                 console.log(error);
             } else {
                 setStudent(json.data[0]);
-                console.log(json.data[0]);
+                setFnameValue({value: json.data[0].fname})
+                setMnameValue({value: json.data[0].mname})
+                setLnameValue({value: json.data[0].lname})
+                setFsurnameValue({value: json.data[0].fsurname})
+                setLsurnameValue({value: json.data[0].lsurname})
             }
         })
     }, [])
@@ -105,7 +117,7 @@ const BodyProfile = () => {
                 <Col s={12} m={12} l={9} xl={9}>
 
                     <CollectionItem
-                        header='Nombres'
+                        header='Names'
                         value={
                             student.fname 
                                     + (student.mname && student.mname != '' ? ' ' + student.mname : '') 
@@ -124,16 +136,33 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalNames.close() } }>
                                 Close
+                            </Button>, 
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    updateStudent(id, {
+                                        fname: fnameValue.value,
+                                        mname: mnameValue.value,
+                                        lname: lnameValue.value,
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                 } }>
+                                Update
                             </Button>
                         ]}>
                         <Row margin='20px 0 10px 0'>
                             <Col s={12}>
                                 <TextInput 
                                     id='inputFname' 
+                                    name='inputFname'
                                     type='text' 
-                                    placeholder='Primer nombre' 
-                                    value={student.fname}
-                                    onChange={() => {}}/>
+                                    placeholder='First name' 
+                                    value={fnameValue.value}
+                                    onChange={ (event) => { setFnameValue({value: event.target.value}) } }/>
                             </Col>
                         </Row>
                         <Row margin='10px 0'>
@@ -141,9 +170,9 @@ const BodyProfile = () => {
                                 <TextInput 
                                     id='inputMname' 
                                     type='text' 
-                                    placeholder='Segundo nombre'
-                                    value={student.mname && student.mname != '' ? ' ' + student.mname : ''}
-                                    onChange={() => {}}/>
+                                    placeholder='Second name'
+                                    value={mnameValue.value}
+                                    onChange={ (event) => { setMnameValue({value: event.target.value}) } }/>
                             </Col>
                         </Row>
                         <Row margin='10px 0'>
@@ -151,9 +180,9 @@ const BodyProfile = () => {
                                 <TextInput 
                                     id='inputLname' 
                                     type='text' 
-                                    placeholder='Tercer nombre'
-                                    value={student.lname && student.lname != '' ? ' ' + student.lname : ''}
-                                    onChange={() => {}}/>
+                                    placeholder='Third name'
+                                    value={lnameValue.value}
+                                    onChange={ (event) => { setLnameValue({value: event.target.value}) } }/>
                             </Col>
                         </Row>
                     </Modal>
@@ -162,7 +191,7 @@ const BodyProfile = () => {
 
                     <CollectionItem
                         header='Surnames'
-                        value={ (student.fsurname && student.fsurname != '' ? student.fsurname : '')
+                        value={ (student.fsurname && student.fsurname != '' ? student.fsurname + ' ' : '')
                                 + (student.lsurname && student.lsurname != '' ? student.lsurname : '') }
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalSurnames.open() }}/>
@@ -177,6 +206,21 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalSurnames.close() } }>
                                 Close
+                            </Button>, 
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    updateStudent(id, {
+                                        fsurname: fsurnameValue.value,
+                                        lsurname: lsurnameValue.value
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                } }>
+                                Update
                             </Button>
                         ]}>
                         <Row margin='20px 0 10px 0'>
@@ -185,8 +229,8 @@ const BodyProfile = () => {
                                     id='inputFsurname' 
                                     type='text' 
                                     placeholder='First surname' 
-                                    value={student.fsurname && student.fsurname != '' ? student.fsurname : ''}
-                                    onChange={() => {}}/>
+                                    value={fsurnameValue.value}
+                                    onChange={ (event) => { setFsurnameValue({value: event.target.value}) } }/>
                             </Col>
                         </Row>
                         <Row margin='10px 0'>
@@ -195,8 +239,8 @@ const BodyProfile = () => {
                                     id='inputLsurname' 
                                     type='text' 
                                     placeholder='Last surname'
-                                    value={student.lsurname && student.lsurname != '' ? student.lsurname : ''}
-                                    onChange={() => {}}/>
+                                    value={lsurnameValue.value}
+                                    onChange={ (event) => { setLsurnameValue({value: event.target.value}) } }/>
                             </Col>
                         </Row>
                     </Modal>
@@ -204,7 +248,7 @@ const BodyProfile = () => {
                     <Divider margin='15px 0 30px 0'/>
 
                     <CollectionItem
-                        header='Edad'
+                        header='Age'
                         value={ calculateAge(student.birth).toString() }/>
 
                     <Divider margin='15px 0 30px 0'/>
@@ -242,7 +286,7 @@ const BodyProfile = () => {
                     <Divider margin='15px 0 30px 0'/>
 
                     <CollectionItem
-                        header='Sección'
+                        header='Section'
                         value={ student.section && student.section != '' ? student.section : '--' }
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalSection.open() }}/>
@@ -314,7 +358,7 @@ const BodyProfile = () => {
                     <Divider margin='15px 0 30px 0'/>
 
                     <CollectionItem
-                        header='Observaciones'
+                        header='Observations'
                         value={ student.observation && student.observation != '' ? student.observation : '--' }
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalObservation.open() }}/>
@@ -322,7 +366,7 @@ const BodyProfile = () => {
                     {/* ****** MODAL OBSERVATION ****** */}
                     <Modal
                         id="modalObservation"
-                        header="Observation"
+                        header="Observations"
                         actions={[
                             <Button 
                                 bg_color={ COLOR.primary } 

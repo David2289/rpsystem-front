@@ -83,7 +83,7 @@ const BodyIndex = () => {
                     <tbody>
                     {students && students.map((student, index) => (
                         <tr key={index}>
-                        <td>{student.fname + ' ' + student.mname}</td>
+                        <td>{student.fname + ' ' + student.mname + ' ' + student.lname}</td>
                         <td>{student.fsurname + ' ' + student.lsurname}</td>
                         <td>{ calculateAge(student.birth) }</td>
                         <td>{student.section}</td>
