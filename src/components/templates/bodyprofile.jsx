@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import $ from 'jquery'; 
 import { useParams } from 'react-router';
 import styled from 'styled-components';
-import { Container, Col, Modal, Select } from 'react-materialize';
+import { Container, Col, Modal, Select, DatePicker } from 'react-materialize';
 import Row from '../organism/row.jsx';
 import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
@@ -62,6 +62,7 @@ const BodyProfile = () => {
     /* MODALS */
     const [modalNames, setModalNames] = useState();
     const [modalSurnames, setModalSurnames] = useState();
+    const [modalBirth, setModalBirth] = useState();
     const [modalEmail, setModalEmail] = useState();
     const [modalSection, setModalSection] = useState();
     const [modalSex, setModalSex] = useState();
@@ -79,12 +80,14 @@ const BodyProfile = () => {
             // ready method is deprecated
             var auxModalNames = M.Modal.getInstance($('#modalNames'));
             var auxModalSurnames = M.Modal.getInstance($('#modalSurnames'));
+            var auxModalBirth = M.Modal.getInstance($('#modalBirth'));
             var auxModalEmail = M.Modal.getInstance($('#modalEmail'));
             var auxModalSection = M.Modal.getInstance($('#modalSection'));
             var auxModalSex = M.Modal.getInstance($('#modalSex'));
             var auxModalObs = M.Modal.getInstance($('#modalObs'));
             setModalNames(auxModalNames);
             setModalSurnames(auxModalSurnames);
+            setModalBirth(auxModalBirth);
             setModalEmail(auxModalEmail);
             setModalSection(auxModalSection);
             setModalSex(auxModalSex);
@@ -116,6 +119,8 @@ const BodyProfile = () => {
                 </Col>
                 <Col s={12} m={12} l={9} xl={9}>
 
+                    {/* ****** NAMES ****** */}
+
                     <CollectionItem
                         header='Names'
                         value={
@@ -126,7 +131,6 @@ const BodyProfile = () => {
                         ic_path={ PathIcEdit }
                         onIcTapped={ () => { modalNames.open() } }/>
 
-                    {/* ****** MODAL NAMES ****** */}
                     <Modal
                         id="modalNames"
                         header="Names"
@@ -187,6 +191,8 @@ const BodyProfile = () => {
                         </Row>
                     </Modal>
 
+                    {/* ****** SURNAMES ****** */}
+                    
                     <Divider margin='15px 0 30px 0'/>
 
                     <CollectionItem
@@ -196,7 +202,6 @@ const BodyProfile = () => {
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalSurnames.open() }}/>
 
-                    {/* ****** MODAL SURNAMES ****** */}
                     <Modal
                         id="modalSurnames"
                         header="Surnames"
@@ -247,9 +252,31 @@ const BodyProfile = () => {
 
                     <Divider margin='15px 0 30px 0'/>
 
+                    {/* ****** BIRTHDAY ****** */}
+
                     <CollectionItem
                         header='Birthday'
-                        value={ getDate(student.birth, 'dd, MMMM yyyy') + ' (' + calculateAge(student.birth).toString() + ' years old)' }/>
+                        value={ getDate(student.birth, 'dd, MMMM yyyy') + ' (' + calculateAge(student.birth).toString() + ')' }
+                        ic_path={ PathIcEdit }
+                        onIcTapped={ () => { modalBirth.open() } } />
+
+                    <Modal
+                        id="modalBirth"
+                        header="Birth"
+                        actions={[
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { modalBirth.close() } }>
+                                Close
+                            </Button>
+                        ]}>
+                        <Row margin='20px 0 10px 0'>
+                            <Col s={12}>
+                                
+                            </Col>
+                        </Row>
+                    </Modal>
 
                     <Divider margin='15px 0 30px 0'/>
 
