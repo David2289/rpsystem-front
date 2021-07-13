@@ -74,9 +74,9 @@ const BodyProfile = () => {
     const [lnameValue, setLnameValue] = useState({value: ''});
     const [fsurnameValue, setFsurnameValue] = useState({value: ''});
     const [lsurnameValue, setLsurnameValue] = useState({value: ''});
-
     const currentDate = new Date();
     const [birthDate, setBirthDate] = useState(new Date());
+    const [emailValue, setEmailValue] = useState({value: ''});
 
     useEffect(() => {
         $(window).on('load', function(){
@@ -107,7 +107,8 @@ const BodyProfile = () => {
                 setLnameValue({value: json.data[0].lname})
                 setFsurnameValue({value: json.data[0].fsurname})
                 setLsurnameValue({value: json.data[0].lsurname})
-                setBirthDate(new Date(json.data[0].birth));
+                setBirthDate(new Date(json.data[0].birth))
+                setEmailValue({value: json.data[0].email})
             }
         })
     }, [])
@@ -329,13 +330,14 @@ const BodyProfile = () => {
 
                     <Divider margin='15px 0 30px 0'/>
 
+                    {/* ****** EMAIL ****** */}
+
                     <CollectionItem
                         header='Email'
                         value={ student.email && student.email != '' ? student.email : '--' }
                         ic_path={ PathIcEdit }
-                        onIcTapped={() => {}}/>
+                        onIcTapped={() => { modalEmail.open() }}/>
 
-                    {/* ****** MODAL EMAIL ****** */}
                     <Modal
                         id="modalEmail"
                         header="Email"
@@ -345,6 +347,20 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalEmail.close() } }>
                                 Close
+                            </Button>,
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    updateStudent(id, {
+                                        email: emailValue.value
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                } }>
+                                Update
                             </Button>
                         ]}>
                         <Row margin='20px 0 10px 0'>
@@ -353,13 +369,15 @@ const BodyProfile = () => {
                                     id='inputEmail' 
                                     type='text' 
                                     placeholder='email' 
-                                    value={student.email && student.email != '' ? student.email : ''}
-                                    onChange={() => {}}/>
+                                    value={emailValue.value}
+                                    onChange={(event) => { setEmailValue({value: event.target.value}) }}/>
                             </Col>
                         </Row>
                     </Modal>
 
                     <Divider margin='15px 0 30px 0'/>
+
+                    {/* ****** SECTION ****** */}
 
                     <CollectionItem
                         header='Section'
@@ -367,7 +385,6 @@ const BodyProfile = () => {
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalSection.open() }}/>
 
-                    {/* ****** MODAL SECTION ****** */}
                     <Modal
                         id="modalSection"
                         header="Section"
