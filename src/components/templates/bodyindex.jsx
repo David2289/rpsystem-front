@@ -3,7 +3,7 @@ import $ from 'jquery';
 import styled from 'styled-components';
 import { Container, Col, Table, Modal, Select, DatePicker } from 'react-materialize';
 import Button from '../atoms/button.jsx';
-import { COLOR, SIZE, SCREEN_MEDIA } from '../../utils/constants.js';
+import { COLOR, SIZE, DATE } from '../../utils/constants.js';
 import Row from '../organism/row.jsx';
 import TextButton from '../atoms/textbutton.jsx'
 import TextInput from '../atoms/textinput.jsx';
@@ -49,6 +49,7 @@ const BodyIndex = () => {
 
     const [students, setStudents] = useState([]);
     const [modal, setModal] = useState();
+    const currentDate = new Date();
 
     useEffect(() => {
         $(window).on('load', function(){
@@ -118,7 +119,7 @@ const BodyIndex = () => {
                 <Modal
                     id="modal0"
                     header="Add student"
-                    fixedFooter={true}
+                    fixedFooter={false} //If true breaks DatePickers
                     actions={[
                     <Button 
                         onTapped={() => { modal.close() }}
@@ -191,24 +192,25 @@ const BodyIndex = () => {
                                 events: [],
                                 firstDay: 0,
                                 format: 'dd mmm, yyyy',
+                                setDefaultDate: false,
+                                maxDate: currentDate,
                                 i18n: {
                                 cancel: 'Cancel',
                                 clear: 'Clear',
                                 done: 'Ok',
-                                months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-                                monthsShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                                months: DATE.months,
+                                monthsShort: DATE.monthsShort,
                                 nextMonth: '›',
                                 previousMonth: '‹',
-                                weekdays: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-                                weekdaysAbbrev: ['S','M','T','W','T','F','S'],
-                                weekdaysShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+                                weekdays: DATE.weekdays,
+                                weekdaysAbbrev: DATE.weekdaysAbbrev,
+                                weekdaysShort: DATE.weekdaysShort
                                 },
                                 isRTL: false,
-                                setDefaultDate: false,
                                 showClearBtn: false,
                                 showDaysInNextAndPreviousMonths: false,
                                 showMonthAfterYear: false,
-                                yearRange: 30
+                                yearRange: 36
                             }}/>
                         </Col>
                         <Col s={12} m={12} l={4} xl={4}>

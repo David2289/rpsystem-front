@@ -6,7 +6,7 @@ import { Container, Col, Modal, Select, DatePicker } from 'react-materialize';
 import Row from '../organism/row.jsx';
 import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
-import { COLOR, SIZE } from '../../utils/constants.js';
+import { COLOR, DATE } from '../../utils/constants.js';
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
@@ -75,6 +75,9 @@ const BodyProfile = () => {
     const [fsurnameValue, setFsurnameValue] = useState({value: ''});
     const [lsurnameValue, setLsurnameValue] = useState({value: ''});
 
+    const currentDate = new Date();
+    const [birthDate, setBirthDate] = useState(new Date());
+
     useEffect(() => {
         $(window).on('load', function(){
             // ready method is deprecated
@@ -104,6 +107,7 @@ const BodyProfile = () => {
                 setLnameValue({value: json.data[0].lname})
                 setFsurnameValue({value: json.data[0].fsurname})
                 setLsurnameValue({value: json.data[0].lsurname})
+                setBirthDate(new Date(json.data[0].birth));
             }
         })
     }, [])
@@ -256,7 +260,7 @@ const BodyProfile = () => {
 
                     <CollectionItem
                         header='Birthday'
-                        value={ getDate(student.birth, 'dd, MMMM yyyy') + ' (' + calculateAge(student.birth).toString() + ')' }
+                        value={ getDate(student.birth, 'dd MMM, yyyy') + ' (' + calculateAge(student.birth).toString() + ')' }
                         ic_path={ PathIcEdit }
                         onIcTapped={ () => { modalBirth.open() } } />
 
@@ -269,11 +273,56 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalBirth.close() } }>
                                 Close
+                            </Button>,
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    const updatedDate = getDate($('#inputBirth')[0].value, 'yyyy-MM-dd');
+                                    updateStudent(id, {
+                                        birth: updatedDate
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                } }>
+                                Update
                             </Button>
                         ]}>
-                        <Row margin='20px 0 10px 0'>
+                        <Row margin='100px 0 170px 0'>
                             <Col s={12}>
-                                
+                                {/* ****** DATEPICKER ****** */}
+                                <DatePicker
+                                id='inputBirth'
+                                placeholder='Birthday'
+                                options={{
+                                    autoClose: false,
+                                    disableWeekends: false,
+                                    events: [],
+                                    firstDay: 0,
+                                    format: 'dd mmm, yyyy',
+                                    defaultDate: birthDate,
+                                    setDefaultDate: true,
+                                    maxDate: currentDate,
+                                    i18n: {
+                                    cancel: 'Cancel',
+                                    clear: 'Clear',
+                                    done: 'Ok',
+                                    months: DATE.months,
+                                    monthsShort: DATE.monthsShort,
+                                    nextMonth: '›',
+                                    previousMonth: '‹',
+                                    weekdays: DATE.weekdays,
+                                    weekdaysAbbrev: DATE.weekdaysAbbrev,
+                                    weekdaysShort: DATE.weekdaysShort
+                                    },
+                                    isRTL: false,
+                                    showClearBtn: false,
+                                    showDaysInNextAndPreviousMonths: false,
+                                    showMonthAfterYear: false,
+                                    yearRange: 36
+                                }}/>
                             </Col>
                         </Row>
                     </Modal>
