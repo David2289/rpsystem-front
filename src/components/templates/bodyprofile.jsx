@@ -12,7 +12,7 @@ import TextArea from '../atoms/textarea.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
 import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
-import { calculateAge } from '../../utils/dates.js';
+import { calculateAge, getDate } from '../../utils/dates.js';
 
 import { getStudentById, updateStudent } from '../../services/studentsService.js';
 
@@ -53,7 +53,7 @@ const BodyProfile = () => {
         'lsurname': '',
         'email': '',
         'sex': '',
-        'birth': '',
+        'birth': '1999-01-01', //Setting valid initial date to avoid crash.
         'regdate': '',
         'section': '',
         'observation': ''
@@ -65,7 +65,7 @@ const BodyProfile = () => {
     const [modalEmail, setModalEmail] = useState();
     const [modalSection, setModalSection] = useState();
     const [modalSex, setModalSex] = useState();
-    const [modalObservation, setModalObservation] = useState();
+    const [modalObs, setModalObs] = useState();
 
     //* INPUT VALUES */
     const [fnameValue, setFnameValue] = useState({value: ''});
@@ -82,13 +82,13 @@ const BodyProfile = () => {
             var auxModalEmail = M.Modal.getInstance($('#modalEmail'));
             var auxModalSection = M.Modal.getInstance($('#modalSection'));
             var auxModalSex = M.Modal.getInstance($('#modalSex'));
-            var auxModalObservation = M.Modal.getInstance($('#modalObservation'));
+            var auxModalObs = M.Modal.getInstance($('#modalObs'));
             setModalNames(auxModalNames);
             setModalSurnames(auxModalSurnames);
             setModalEmail(auxModalEmail);
             setModalSection(auxModalSection);
             setModalSex(auxModalSex);
-            setModalObservation(auxModalObservation);
+            setModalObs(auxModalObs);
         });
 
         getStudentById(id).then(json => {
@@ -248,8 +248,8 @@ const BodyProfile = () => {
                     <Divider margin='15px 0 30px 0'/>
 
                     <CollectionItem
-                        header='Age'
-                        value={ calculateAge(student.birth).toString() }/>
+                        header='Birthday'
+                        value={ getDate(student.birth, 'dd, MMMM yyyy') + ' (' + calculateAge(student.birth).toString() + ' years old)' }/>
 
                     <Divider margin='15px 0 30px 0'/>
 
@@ -257,7 +257,7 @@ const BodyProfile = () => {
                         header='Email'
                         value={ student.email && student.email != '' ? student.email : '--' }
                         ic_path={ PathIcEdit }
-                        onIcTapped={() => { modalEmail.open() }}/>
+                        onIcTapped={() => {}}/>
 
                     {/* ****** MODAL EMAIL ****** */}
                     <Modal
@@ -361,17 +361,17 @@ const BodyProfile = () => {
                         header='Observations'
                         value={ student.observation && student.observation != '' ? student.observation : '--' }
                         ic_path={ PathIcEdit }
-                        onIcTapped={() => { modalObservation.open() }}/>
+                        onIcTapped={() => { modalObs.open() }}/>
 
                     {/* ****** MODAL OBSERVATION ****** */}
                     <Modal
-                        id="modalObservation"
+                        id="modalObs"
                         header="Observations"
                         actions={[
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalObservation.close() } }>
+                                onTapped={ () => { modalObs.close() } }>
                                 Close
                             </Button>
                         ]}>
