@@ -445,6 +445,20 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalSex.close() } }>
                                 Close
+                            </Button>,
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    updateStudent(id, {
+                                        sex: $('#selectSex')[0].value ? $('#selectSex')[0].value : ''
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                } }>
+                                Update
                             </Button>
                         ]}>
                         <Row margin='20px 0 10px 0'>
