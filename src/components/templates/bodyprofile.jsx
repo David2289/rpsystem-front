@@ -77,6 +77,7 @@ const BodyProfile = () => {
     const currentDate = new Date();
     const [birthDate, setBirthDate] = useState(new Date());
     const [emailValue, setEmailValue] = useState({value: ''});
+    const [obsValue, setObsValue] = useState({value: ''});
 
     useEffect(() => {
         $(window).on('load', function(){
@@ -109,6 +110,7 @@ const BodyProfile = () => {
                 setLsurnameValue({value: json.data[0].lsurname})
                 setBirthDate(new Date(json.data[0].birth))
                 setEmailValue({value: json.data[0].email})
+                setObsValue({value: json.data[0].observation})
             }
         })
     }, [])
@@ -496,16 +498,30 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalObs.close() } }>
                                 Close
+                            </Button>,
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    updateStudent(id, {
+                                        observation: $('#inputObs')[0].value ? $('#inputObs')[0].value : ''
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                } }>
+                                Update
                             </Button>
                         ]}>
                         <Row margin='20px 0 10px 0'>
                             <Col s={12}>
                                 <TextArea 
-                                    id='inputObservation' 
+                                    id='inputObs' 
                                     type='text' 
                                     placeholder='observation' 
-                                    value={student.observation && student.observation != '' ? student.observation : ''}
-                                    onChange={() => {}}/>
+                                    value={obsValue.value}
+                                    onChange={(event) => { setObsValue({value: event.target.value}) }}/>
                             </Col>
                         </Row>
                     </Modal>
