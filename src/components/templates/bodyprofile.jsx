@@ -394,6 +394,20 @@ const BodyProfile = () => {
                                 float='right'
                                 onTapped={ () => { modalSection.close() } }>
                                 Close
+                            </Button>,
+                            <Button 
+                                bg_color={ COLOR.primary } 
+                                float='right'
+                                onTapped={ () => { 
+                                    updateStudent(id, {
+                                        section: $('#selectSection')[0].value ? $('#selectSection')[0].value : ''
+                                    }).then(json => {
+                                        if (!json.error) {
+                                            location.reload();
+                                        }
+                                    })
+                                } }>
+                                Update
                             </Button>
                         ]}>
                         <Row margin='20px 0 10px 0'>
@@ -414,13 +428,14 @@ const BodyProfile = () => {
 
                     <Divider margin='15px 0 30px 0'/>
 
+                    {/* ****** SEX ****** */}
+
                     <CollectionItem
                         header='Sex'
                         value={ student.sex && student.sex != '' ? sexCharToName(student.sex) : '--' }
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalSex.open() }}/>
 
-                    {/* ****** MODAL SEX ****** */}
                     <Modal
                         id="modalSex"
                         header="Sex"
@@ -450,13 +465,14 @@ const BodyProfile = () => {
 
                     <Divider margin='15px 0 30px 0'/>
 
+                    {/* ****** OBSERVATION ****** */}
+
                     <CollectionItem
                         header='Observations'
                         value={ student.observation && student.observation != '' ? student.observation : '--' }
                         ic_path={ PathIcEdit }
                         onIcTapped={() => { modalObs.open() }}/>
 
-                    {/* ****** MODAL OBSERVATION ****** */}
                     <Modal
                         id="modalObs"
                         header="Observations"
