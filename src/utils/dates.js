@@ -1,7 +1,7 @@
 import '@js-joda/timezone' // Just needs to be imported; registers itself automatically
 import { DateTimeFormatter, LocalDate, nativeJs } from '@js-joda/core'
 import { Locale } from '@js-joda/locale_en'
-import capitalizeFirstLetter from './utils'
+import { capitalizeFirstLetter } from './utils'
 
 export const calculateAge = (birth) => {
     var birthDate = new Date(birth);

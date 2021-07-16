@@ -23,10 +23,6 @@ const Burger = styled.img`
 const logo_dom = <a href='/'><Logo src={PathLogo}></Logo></a>
 const burger_dom = <Burger src={PathBurger}></Burger>;
 
-const LabelMediumBodySecondary = styled(LabelSailecMedium)`
-    font-size: ${SIZE.body};
-    color: ${COLOR.secondary};
-`;
 
 const NavbarStyled = styled(Navbar)`
     @media only screen and ${SCREEN_MEDIA.small} {
@@ -49,7 +45,7 @@ const NavbarStyled = styled(Navbar)`
 
 const NavItemStyled = styled(NavItem)`
     color: ${COLOR.secondary};
-    background-color: ${props => props.selected ? '#f0bc11' : COLOR.primary};
+    background-color: ${props => props.selected ? COLOR.primaryDark : COLOR.primary};
 `;
 
 const Header = (props) => {
@@ -85,29 +81,49 @@ const Header = (props) => {
             <NavItemStyled
                 href='/'
                 selected={initial_selected}>
-                <LabelMediumBodySecondary>{LABEL.initial}</LabelMediumBodySecondary>
+                <LabelSailecMedium
+                    text_size={SIZE.body}
+                    text_color={COLOR.secondary}>
+                    {LABEL.initial}
+                </LabelSailecMedium>
             </NavItemStyled>
 
             <NavItemStyled
                 href='/service'
                 selected={service_selected}>
-                <LabelMediumBodySecondary>{LABEL.service}</LabelMediumBodySecondary>
+                <LabelSailecMedium
+                    text_size={SIZE.body}
+                    text_color={COLOR.secondary}>
+                    {LABEL.service}
+                </LabelSailecMedium>
             </NavItemStyled>
 
             <NavItemStyled
                 href='/nosotros'
                 selected={us_selected}>
-                <LabelMediumBodySecondary>{LABEL.us}</LabelMediumBodySecondary>
+                <LabelSailecMedium
+                    text_size={SIZE.body}
+                    text_color={COLOR.secondary}>
+                    {LABEL.us}
+                </LabelSailecMedium>
             </NavItemStyled>
 
             <NavItemStyled>
-                <LabelMediumBodySecondary>Nuestra Propuesta</LabelMediumBodySecondary>
+                <LabelSailecMedium
+                    text_size={SIZE.body}
+                    text_color={COLOR.secondary}>
+                    Nuestra propuesta
+                </LabelSailecMedium>
             </NavItemStyled>
 
             <NavItemStyled
                 href='/contact'
                 selected={contact_selected}>
-                <LabelMediumBodySecondary>{LABEL.contact}</LabelMediumBodySecondary>
+                <LabelSailecMedium
+                    text_size={SIZE.body}
+                    text_color={COLOR.secondary}>
+                    {LABEL.contact}
+                </LabelSailecMedium>
             </NavItemStyled>
 
         </NavbarStyled>

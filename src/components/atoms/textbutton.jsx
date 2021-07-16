@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SVG from 'react-inlinesvg';
-import { SIZE, COLOR } from '../../utils/constants.js';
 import { LabelSailecRegular } from '../atoms/label.jsx'
 
 
@@ -33,16 +32,11 @@ const Icon = styled.img`
     display: block;
 `;
 
-const LabelRegularBody = styled(LabelSailecRegular)`
-    font-size: ${props => props.title_size ? props.title_size : SIZE.body};
-    color: ${props => props.title_color ? props.title_color : COLOR.black};
-    margin-right: ${props => props.separation ? props.separation : '15px'};
-`;
-
 
 const TextButton = (props) => {
     
     const icAlign = props.ic_align ? props.ic_align : 'left';
+    const margin = '0 ' + props.separation + ' 0 ' + props.separation;
     
     const icContent = props.ic_color ? 
         <IconContent
@@ -64,12 +58,12 @@ const TextButton = (props) => {
         </IconContent>;
     
     const label = 
-        <LabelRegularBody
-            title_color={props.title_color}
-            title_size={props.title_size}
-            separation={props.separation} >
+        <LabelSailecRegular
+            text_color={props.title_color}
+            text_size={props.title_size}
+            margin={margin} >
             {props.children}
-        </LabelRegularBody>;
+        </LabelSailecRegular>;
 
     if (icAlign === 'right') {
         return (

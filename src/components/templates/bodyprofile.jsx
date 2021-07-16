@@ -7,6 +7,7 @@ import Row from '../organism/row.jsx';
 import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
 import { COLOR, DATE } from '../../utils/constants.js';
+import { LabelSailecRegular } from '../atoms/label.jsx'
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
@@ -24,6 +25,11 @@ const SVGStyled = styled(SVG)`
     height: 70px;
     fill: ${COLOR.gray};
     display: block;
+    margin: auto;
+`;
+
+const ColStyled = styled(Col)`
+    float: none,
     margin: auto;
 `;
 
@@ -67,6 +73,7 @@ const BodyProfile = () => {
     const [modalSection, setModalSection] = useState();
     const [modalSex, setModalSex] = useState();
     const [modalObs, setModalObs] = useState();
+    const [modalDelete, setModalDelete] = useState();
 
     //* INPUT VALUES */
     const [fnameValue, setFnameValue] = useState({value: ''});
@@ -89,6 +96,7 @@ const BodyProfile = () => {
             var auxModalSection = M.Modal.getInstance($('#modalSection'));
             var auxModalSex = M.Modal.getInstance($('#modalSex'));
             var auxModalObs = M.Modal.getInstance($('#modalObs'));
+            var auxModalDelete = M.Modal.getInstance($('#modalDelete'));
             setModalNames(auxModalNames);
             setModalSurnames(auxModalSurnames);
             setModalBirth(auxModalBirth);
@@ -96,6 +104,7 @@ const BodyProfile = () => {
             setModalSection(auxModalSection);
             setModalSex(auxModalSex);
             setModalObs(auxModalObs);
+            setModalDelete(auxModalDelete);
         });
 
         getStudentById(id).then(json => {
@@ -546,9 +555,30 @@ const BodyProfile = () => {
                         bg_color={COLOR.white}
                         border_color={COLOR.grayDark}
                         border_width='1px'
-                        text_color={COLOR.black}>
+                        text_color={COLOR.black}
+                        onTapped={ () => { modalDelete.open() } }>
                         Remove
                     </Button>
+
+                    <Modal
+                        id="modalDelete">
+                        <Row margin='20px 0 10px 0'>
+                            <ColStyled s={12}>
+                                <LabelSailecRegular
+                                    text_align='center'>
+                                    Are you sure you want to remove this student?
+                                </LabelSailecRegular>
+                            </ColStyled>
+                            <Col s={12}>
+                                <TextArea 
+                                    id='inputObs' 
+                                    type='text' 
+                                    placeholder='observation' 
+                                    value={obsValue.value}
+                                    onChange={(event) => { setObsValue({value: event.target.value}) }}/>
+                            </Col>
+                        </Row>
+                    </Modal>
                 </Col>
             </Row>
         </Container>

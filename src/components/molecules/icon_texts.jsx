@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SVG from 'react-inlinesvg';
 import { COLOR, SIZE } from '../../utils/constants.js';
 import { LabelSailecBold, LabelSailecRegular } from '../atoms/label.jsx';
+import { isNumeric } from '../../utils/utils.js'
 
 import CountUp from 'react-countup';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -21,38 +22,21 @@ const SVGStyled = styled(SVG)`
     margin: ${props => props.alignment && props.alignment == 'center' ? 'auto' : 'none'};
 `;
 
-const Title = styled(LabelSailecBold)`
-    color: ${props => props.title_color ? props.title_color : COLOR.secondary};
-    font-size: ${props => props.title_size ? props.title_size : SIZE.headline};
-    text-align: ${props => props.alignment ? props.alignment : 'left'};
-    margin-top: ${props => props.title_separation ? props.title_separation : '10px'};
-`;
-
-const Description = styled(LabelSailecRegular)`
-    color: ${props => props.desc_color ? props.desc_color : COLOR.secondary};
-    font-size: ${SIZE.body};
-    text-align: ${props => props.alignment ? props.alignment : 'left'};
-    margin-top: ${props => props.desc_separation ? props.desc_separation : '0px'};
-`;
-
-
-
-function isNumeric(num) {
-    return !isNaN(num)
-}
-
 
 const IconTexts = (props) => {
     
     const [state, setState] = useState(true);
+    const marginTitle = props.title_separation ? props.title_separation + ' 0 0 0' : '10px';
+    const marginDesc = props.desc_separation ? props.desc_separation + ' 0 0 0' : '0px';
     const listDesc = props.descs?.map((desc, index) =>
-            <Description
+            <LabelSailecRegular
                 key={index}
-                desc_color={props.desc_color}
-                alignment={props.alignment}
-                desc_separation={props.desc_separation}>
+                text_color={props.desc_color ? props.desc_color : COLOR.secondary}
+                text_size={SIZE.body}
+                text_align={props.alignment ? props.alignment : 'left'}
+                margin={marginDesc}>
                 {desc}
-            </Description>
+            </LabelSailecRegular>
         );
     
     
@@ -75,12 +59,13 @@ const IconTexts = (props) => {
                     {({ countUpRef, start }) => (
                         <VisibilitySensor active={state} onChange={start} delayedCall>
                             {({isVisible}) => 
-                                <Title 
-                                ref={countUpRef}
-                                title_color={props.title_color}
-                                title_size={props.title_size}
-                                alignment={props.alignment}
-                                title_separation={props.title_separation} />
+                                <LabelSailecBold 
+                                text_color={props.title_color ? props.title_color : COLOR.secondary}
+                                text_size={props.title_size ? props.title_size : SIZE.headline}
+                                text_align={props.alignment ? props.alignment : 'left'}
+                                margin={marginTitle} >
+                                    <span ref={countUpRef}/>
+                                </LabelSailecBold>
                             }
                         </VisibilitySensor>
                     )}
@@ -98,13 +83,13 @@ const IconTexts = (props) => {
                     ic_color={props.ic_color}
                     alignment={props.alignment}
                     />
-                <Title 
-                    title_color={props.title_color}
-                    title_size={props.title_size}
-                    alignment={props.alignment}
-                    title_separation={props.title_separation}>
-                        {props.title}
-                </Title>
+                <LabelSailecBold 
+                    text_color={props.title_color ? props.title_color : COLOR.secondary}
+                    text_size={props.title_size ? props.title_size : SIZE.headline}
+                    text_align={props.alignment ? props.alignment : 'left'}
+                    margin={marginTitle}>
+                    {props.title}
+                </LabelSailecBold>
                 {listDesc}
             </Content>
         );

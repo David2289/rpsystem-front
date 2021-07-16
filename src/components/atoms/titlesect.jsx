@@ -9,11 +9,6 @@ const Content = styled.div`
     margin: ${props => props.margin ? props.margin : '0'};
 `;
 
-const TitleDisplay = styled(LabelSailecBold)`
-    font-size: ${SIZE.display};
-    color: ${props => props.title_color ? props.title_color : COLOR.secondary};
-`;
-
 const Underline = styled.div`
     width: 90px;
     height: 4px;
@@ -26,7 +21,11 @@ const TitleSect = (props) => {
     return (
         <Content 
             margin={props.margin}>
-            <TitleDisplay title_color={props.color}>{props.children}</TitleDisplay>
+            <LabelSailecBold 
+                text_size={SIZE.display}
+                text_color={props.color ? props.color : COLOR.secondary}>
+                {props.children}
+            </LabelSailecBold>
             <Underline></Underline>
         </Content>
     );

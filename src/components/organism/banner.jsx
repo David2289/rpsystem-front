@@ -35,12 +35,8 @@ width: 100%;
 `;
 
 const Title = styled(LabelHarmonyRegular)`
-    position: relative;
     z-index: 1;
     width: 100%;
-    color: ${props => props.title_color ? props.title_color : COLOR.white};
-    font-size: ${SIZE.display};
-    text-align: center;
 `;
 
 const Banner = (props) => {
@@ -50,7 +46,11 @@ const Banner = (props) => {
             image={<img alt="" src={props.img_path}/>}
             options={{responsiveThreshold: 0}}
             children= {
-                <Title>
+                <Title
+                    text_size={SIZE.display}
+                    text_color={props.title_color ? props.title_color : COLOR.white}
+                    text_align='center'
+                    position='relative'>
                     {props.title}
                 </Title>
             }

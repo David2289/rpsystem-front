@@ -11,4 +11,11 @@ const capitalizeFirstLetter = (input) => {
     return arr.join(" ");
 }
 
-export default capitalizeFirstLetter;
+const isNumeric = (num) => {
+    return !isNaN(num)
+}
+
+export {
+    capitalizeFirstLetter,
+    isNumeric
+}

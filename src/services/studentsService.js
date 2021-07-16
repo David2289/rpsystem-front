@@ -15,3 +15,7 @@ export const createStudent = (student) => {
 export const updateStudent = (id, student) => {
     return axios.post(`http://localhost:3000/api/students/update/${id}`, student);
 }
+
+export const removeStudent = (id) => {
+    return axios.delete(`http://localhost:3000/api/students/remove/${id}`);
+}

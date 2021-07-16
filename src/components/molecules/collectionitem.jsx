@@ -5,14 +5,6 @@ import { COLOR, SIZE } from '../../utils/constants.js';
 import TextButton from '../atoms/textbutton.jsx';
 import { LiSailecMedium, LabelSailecRegular } from '../atoms/label.jsx';
 
-
-const Li = styled(LiSailecMedium)`
-    font-size: ${SIZE.title};
-    color: ${COLOR.secondary};
-    position: relative;
-    margin: 0 0 10px 0;
-`;
-
 const TextButtonContent = styled.div`
     // Vertical center. valign-wrapper creates purple padding.
     margin: 0;
@@ -21,11 +13,6 @@ const TextButtonContent = styled.div`
     left: 98%;
     -ms-transform: translate(-98%, -50%);
     transform: translate(-98%, -50%);
-`;
-
-const Value = styled(LabelSailecRegular)`
-    font-size: ${SIZE.body};
-    color: ${COLOR.secondary};
 `;
 
 const CollectionItem = (props) => {
@@ -44,12 +31,19 @@ const CollectionItem = (props) => {
     return (
         <div>
             <ul>
-                <Li>
+                <LiSailecMedium
+                    text_size={SIZE.title}
+                    text_color={COLOR.secondary}
+                    position='relative'
+                    margin='0 0 10px 0'>
                 {props.header}
                 {ic}
-                </Li>
+                </LiSailecMedium>
             </ul>
-            <Value>{props.value}</Value>
+            <LabelSailecRegular
+                text_color={COLOR.secondary}>
+                {props.value}
+            </LabelSailecRegular>
         </div>
     );
 }
