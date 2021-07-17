@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import $ from 'jquery'; 
-import { useParams } from 'react-router';
+import { useParams, Redirect } from 'react-router';
 import styled from 'styled-components';
 import { Container, Col, Modal, Select, DatePicker } from 'react-materialize';
 import Row from '../organism/row.jsx';
 import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
-import { COLOR, DATE } from '../../utils/constants.js';
+import { COLOR, DATE, SIZE } from '../../utils/constants.js';
 import { LabelSailecRegular } from '../atoms/label.jsx'
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
@@ -15,7 +15,11 @@ import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
 import { calculateAge, getDate } from '../../utils/dates.js';
 
-import { getStudentById, updateStudent } from '../../services/studentsService.js';
+import { 
+    getStudentById, 
+    updateStudent, 
+    removeStudent 
+} from '../../services/studentsService.js';
 
 import PathIcUser from '../../icons/ic_user.svg';
 import PathIcEdit from '../../icons/ic_edit.svg';
@@ -47,6 +51,8 @@ const sexCharToName = (char) => {
 
 
 const BodyProfile = () => {
+
+    const [redirectHome, setRedirectHome] = useState(false);
 
     const { id } = useParams();
 
@@ -125,6 +131,11 @@ const BodyProfile = () => {
     }, [])
 
     return(
+
+        redirectHome 
+        ?
+        <Redirect to="/" /> 
+        :
         <Container>
             <Row margin='80px 0 40px 0'>
                 <TitleSect>Details</TitleSect>
@@ -561,21 +572,44 @@ const BodyProfile = () => {
                     </Button>
 
                     <Modal
-                        id="modalDelete">
-                        <Row margin='20px 0 10px 0'>
-                            <ColStyled s={12}>
+                        id="modalDelete"
+                        actions={null}>
+                        <Row margin='40px 0 40px 0'>
+                            <Col s={12}>
                                 <LabelSailecRegular
+                                    text_size={SIZE.title}
                                     text_align='center'>
                                     Are you sure you want to remove this student?
                                 </LabelSailecRegular>
-                            </ColStyled>
-                            <Col s={12}>
-                                <TextArea 
-                                    id='inputObs' 
-                                    type='text' 
-                                    placeholder='observation' 
-                                    value={obsValue.value}
-                                    onChange={(event) => { setObsValue({value: event.target.value}) }}/>
+                            </Col>
+                        </Row>
+                        <Row margin='40px 0 0 0'>
+                            <Col s={6}>
+                                <Button 
+                                    float='right'
+                                    bg_width='100px'
+                                    bg_color={COLOR.primary}
+                                    text_color={COLOR.black}
+                                    onTapped={ () => { 
+                                        removeStudent(id)
+                                        .then(json => {
+                                            if (!json.error) {
+                                                setRedirectHome(true);
+                                            }
+                                        })
+                                     } }>
+                                    Yes
+                                </Button>
+                            </Col>
+                            <Col s={6}>
+                                <Button 
+                                    float='left'
+                                    bg_width='100px'
+                                    bg_color={COLOR.primary}
+                                    text_color={COLOR.black}
+                                    onTapped={ () => { modalDelete.close() } }>
+                                    No
+                                </Button>
                             </Col>
                         </Row>
                     </Modal>

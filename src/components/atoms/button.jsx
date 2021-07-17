@@ -9,6 +9,7 @@ import SVG from 'react-inlinesvg';
 const ButtonStyled = styled(MatButton)`
     margin: ${props => props.margin ? props.margin : '0 0'};
     float: ${props => props.float ? props.float : 'left'};
+    width: ${props => props.bg_width ? props.bg_width : 'none'};
     background: ${props => props.bg_color ? props.bg_color : 'none'};
     color: ${props => props.text_color ? props.text_color : COLOR.black};
     border: ${props => props.border_color ? '1px solid ' + props.border_color : 'none'};
@@ -51,6 +52,7 @@ const Button = (props) => {
         <ButtonStyled
             onClick={ props.onTapped }
             margin={ props.margin }
+            bg_width={ props.bg_width }
             bg_color={ props.bg_color }
             border_color={ props.border_color }
             border_width={ props.border_width }
@@ -65,6 +67,7 @@ const Button = (props) => {
 Button.propTypes = {
     onTapped: PropTypes.func,
     ic_path: PropTypes.string,
+    bg_width: PropTypes.string, 
     bg_color: PropTypes.string, 
     border_color: PropTypes.string, 
     border_width: PropTypes.string, 
