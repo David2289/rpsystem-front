@@ -10,7 +10,7 @@ export const calculateAge = (birth) => {
     return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
-export const getDate = (inputDateString, ouputFormat) => {
+export const getDateStringFromDateString = (inputDateString, ouputFormat) => {
     var inputJsDate = new Date(inputDateString); //Native JS Date
     var inputDate = LocalDate.from(nativeJs(inputJsDate));
     const formatter = DateTimeFormatter
@@ -18,4 +18,18 @@ export const getDate = (inputDateString, ouputFormat) => {
                         .withLocale(new Locale('en', 'US', 'en'));
     const outputDateString = inputDate.format(formatter);
     return capitalizeFirstLetter(outputDateString.replace('.', ''))
+}
+
+export const getDateStringFromDate = (inputJsDate, ouputFormat) => {
+    var inputDate = LocalDate.from(nativeJs(inputJsDate));
+    const formatter = DateTimeFormatter
+                        .ofPattern(ouputFormat)
+                        .withLocale(new Locale('en', 'US', 'en'));
+    const outputDateString = inputDate.format(formatter);
+    return capitalizeFirstLetter(outputDateString.replace('.', ''))
+}
+
+export const isSameDate = (jsDate1, jsDate2) => {
+    console.log(jsDate1.getTime() == jsDate2.getTime())
+    return jsDate1.getTime() == jsDate2.getTime();
 }

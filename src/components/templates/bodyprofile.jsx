@@ -13,8 +13,13 @@ import TextArea from '../atoms/textarea.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
 import Button from '../atoms/button.jsx';
 import Divider from '../atoms/divider.jsx';
-import { calculateAge, getDate } from '../../utils/dates.js';
-
+import { sexCharToName } from '../../manager/profilemanager.js';
+import { 
+    calculateAge, 
+    getDateStringFromDateString, 
+    getDateStringFromDate, 
+    isSameDate
+} from '../../utils/dates.js';
 import { 
     getStudentById, 
     updateStudent, 
@@ -31,23 +36,6 @@ const SVGStyled = styled(SVG)`
     display: block;
     margin: auto;
 `;
-
-const ColStyled = styled(Col)`
-    float: none,
-    margin: auto;
-`;
-
-const sexCharToName = (char) => {
-    if (char == 'm') {
-        return 'Masculino';
-    } 
-    else if (char == 'f') {
-        return 'Femenino';
-    }
-    else {
-        return '';
-    }
-}
 
 
 const BodyProfile = () => {
@@ -71,7 +59,7 @@ const BodyProfile = () => {
         'observation': ''
     });
 
-    /* MODALS */
+    //* MODALS */
     const [modalNames, setModalNames] = useState();
     const [modalSurnames, setModalSurnames] = useState();
     const [modalBirth, setModalBirth] = useState();
@@ -88,29 +76,21 @@ const BodyProfile = () => {
     const [fsurnameValue, setFsurnameValue] = useState({value: ''});
     const [lsurnameValue, setLsurnameValue] = useState({value: ''});
     const currentDate = new Date();
-    const [birthDate, setBirthDate] = useState(new Date());
+    const [birthDate, setBirthDate] = useState(new Date()); // Student birth Date
     const [emailValue, setEmailValue] = useState({value: ''});
     const [obsValue, setObsValue] = useState({value: ''});
 
     useEffect(() => {
         $(window).on('load', function(){
             // ready method is deprecated
-            var auxModalNames = M.Modal.getInstance($('#modalNames'));
-            var auxModalSurnames = M.Modal.getInstance($('#modalSurnames'));
-            var auxModalBirth = M.Modal.getInstance($('#modalBirth'));
-            var auxModalEmail = M.Modal.getInstance($('#modalEmail'));
-            var auxModalSection = M.Modal.getInstance($('#modalSection'));
-            var auxModalSex = M.Modal.getInstance($('#modalSex'));
-            var auxModalObs = M.Modal.getInstance($('#modalObs'));
-            var auxModalDelete = M.Modal.getInstance($('#modalDelete'));
-            setModalNames(auxModalNames);
-            setModalSurnames(auxModalSurnames);
-            setModalBirth(auxModalBirth);
-            setModalEmail(auxModalEmail);
-            setModalSection(auxModalSection);
-            setModalSex(auxModalSex);
-            setModalObs(auxModalObs);
-            setModalDelete(auxModalDelete);
+            setModalNames(M.Modal.getInstance($('#modalNames')));
+            setModalSurnames(M.Modal.getInstance($('#modalSurnames')));
+            setModalBirth(M.Modal.getInstance($('#modalBirth')));
+            setModalEmail(M.Modal.getInstance($('#modalEmail')));
+            setModalSection(M.Modal.getInstance($('#modalSection')));
+            setModalSex(M.Modal.getInstance($('#modalSex')));
+            setModalObs(M.Modal.getInstance($('#modalObs')));
+            setModalDelete(M.Modal.getInstance($('#modalDelete')));
         });
 
         getStudentById(id).then(json => {
@@ -169,6 +149,11 @@ const BodyProfile = () => {
                                 Close
                             </Button>, 
                             <Button 
+                                disabled={ 
+                                    fnameValue.value == student.fname && 
+                                    mnameValue.value == student.mname && 
+                                    lnameValue.value == student.lname 
+                                }
                                 bg_color={ COLOR.primary } 
                                 float='right'
                                 onTapped={ () => { 
@@ -240,6 +225,10 @@ const BodyProfile = () => {
                                 Close
                             </Button>, 
                             <Button 
+                                disabled={ 
+                                    fsurnameValue.value == student.fsurname && 
+                                    lsurnameValue.value == student.lsurname 
+                                }
                                 bg_color={ COLOR.primary } 
                                 float='right'
                                 onTapped={ () => { 
@@ -283,7 +272,8 @@ const BodyProfile = () => {
 
                     <CollectionItem
                         header='Birthday'
-                        value={ getDate(student.birth, 'dd MMM, yyyy') + ' (' + calculateAge(student.birth).toString() + ')' }
+                        value={ getDateStringFromDateString(student.birth, 'dd MMM, yyyy') 
+                                + ' (' + calculateAge(student.birth).toString() + ')' }
                         ic_path={ PathIcEdit }
                         onIcTapped={ () => { modalBirth.open() } } />
 
@@ -298,12 +288,13 @@ const BodyProfile = () => {
                                 Close
                             </Button>,
                             <Button 
+                                disabled={ false }
                                 bg_color={ COLOR.primary } 
                                 float='right'
                                 onTapped={ () => { 
-                                    const updatedDate = getDate($('#inputBirth')[0].value, 'yyyy-MM-dd');
+                                    const selected = getDateStringFromDateString($('#inputBirth')[0].value, 'yyyy-MM-dd');
                                     updateStudent(id, {
-                                        birth: updatedDate
+                                        birth: selected
                                     }).then(json => {
                                         if (!json.error) {
                                             location.reload();
@@ -341,6 +332,9 @@ const BodyProfile = () => {
                                     weekdaysShort: DATE.weekdaysShort
                                     },
                                     isRTL: false,
+                                    onSelect: function(date) {
+                                        //Close datepicker
+                                    }, 
                                     showClearBtn: false,
                                     showDaysInNextAndPreviousMonths: false,
                                     showMonthAfterYear: false,
@@ -588,8 +582,8 @@ const BodyProfile = () => {
                                 <Button 
                                     float='right'
                                     bg_width='100px'
-                                    bg_color={COLOR.primary}
-                                    text_color={COLOR.black}
+                                    bg_color={COLOR.red}
+                                    text_color={COLOR.white}
                                     onTapped={ () => { 
                                         removeStudent(id)
                                         .then(json => {
@@ -605,8 +599,8 @@ const BodyProfile = () => {
                                 <Button 
                                     float='left'
                                     bg_width='100px'
-                                    bg_color={COLOR.primary}
-                                    text_color={COLOR.black}
+                                    bg_color={COLOR.red}
+                                    text_color={COLOR.white}
                                     onTapped={ () => { modalDelete.close() } }>
                                     No
                                 </Button>

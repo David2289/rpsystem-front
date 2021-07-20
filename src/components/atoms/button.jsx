@@ -50,6 +50,9 @@ function lightenColor(color, percent) {
 const Button = (props) => {
     return (
         <ButtonStyled
+            id={ props.id }
+            className={ props.className }
+            disabled={ props.disabled }
             onClick={ props.onTapped }
             margin={ props.margin }
             bg_width={ props.bg_width }
@@ -64,7 +67,14 @@ const Button = (props) => {
     )
 }
 
+Button.defaultProps = {
+    disabled: false
+}
+
 Button.propTypes = {
+    id: PropTypes.string,
+    className: PropTypes.string, //Must have className to apply styled component css properties.
+    disabled: PropTypes.bool, 
     onTapped: PropTypes.func,
     ic_path: PropTypes.string,
     bg_width: PropTypes.string, 
