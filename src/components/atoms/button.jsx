@@ -8,8 +8,8 @@ import SVG from 'react-inlinesvg';
 
 const ButtonStyled = styled(MatButton)`
     margin: ${props => props.margin ? props.margin : '0 0'};
-    float: ${props => props.float ? props.float : 'left'};
-    width: ${props => props.bg_width ? props.bg_width : 'none'};
+    float: ${props => props.float ? props.float : ''};
+    width: ${props => props.bg_width ? props.bg_width : ''};
     background: ${props => props.bg_color ? props.bg_color : 'none'};
     color: ${props => props.text_color ? props.text_color : COLOR.black};
     border: ${props => props.border_color ? '1px solid ' + props.border_color : 'none'};

@@ -16,9 +16,7 @@ import Divider from '../atoms/divider.jsx';
 import { sexCharToName } from '../../manager/profilemanager.js';
 import { 
     calculateAge, 
-    getDateStringFromDateString, 
-    getDateStringFromDate, 
-    isSameDate
+    getDateStringFromDateString
 } from '../../utils/dates.js';
 import { 
     getStudentById, 
@@ -35,6 +33,20 @@ const SVGStyled = styled(SVG)`
     fill: ${COLOR.gray};
     display: block;
     margin: auto;
+`;
+
+const BottomButtonContainer = styled.div`
+    position: relative;
+    height: 150px;
+`;
+
+const BottomButton = styled(Button)`
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 `;
 
 
@@ -365,6 +377,7 @@ const BodyProfile = () => {
                                 Close
                             </Button>,
                             <Button 
+                                disabled={ emailValue.value == student.email }
                                 bg_color={ COLOR.primary } 
                                 float='right'
                                 onTapped={ () => { 
@@ -514,6 +527,7 @@ const BodyProfile = () => {
                                 Close
                             </Button>,
                             <Button 
+                                disabled={ obsValue.value == student.observation }
                                 bg_color={ COLOR.primary } 
                                 float='right'
                                 onTapped={ () => { 
@@ -544,26 +558,14 @@ const BodyProfile = () => {
             </Row>
 
             <Row margin='80px auto'>
-                <Col s={6}>
-                    <Button 
-                        float='right'
-                        bg_color={COLOR.white}
-                        border_color={COLOR.grayDark}
-                        border_width='1px'
-                        text_color={COLOR.black}>
-                        Update
-                    </Button>
-                </Col>
-                <Col s={6}>
-                    <Button 
-                        float='left'
-                        bg_color={COLOR.white}
-                        border_color={COLOR.grayDark}
-                        border_width='1px'
-                        text_color={COLOR.black}
+                <BottomButtonContainer>
+
+                    <BottomButton
+                        bg_color={COLOR.red}
+                        text_color={COLOR.white}
                         onTapped={ () => { modalDelete.open() } }>
                         Remove
-                    </Button>
+                    </BottomButton>
 
                     <Modal
                         id="modalDelete"
@@ -591,7 +593,7 @@ const BodyProfile = () => {
                                                 setRedirectHome(true);
                                             }
                                         })
-                                     } }>
+                                        } }>
                                     Yes
                                 </Button>
                             </Col>
@@ -599,15 +601,19 @@ const BodyProfile = () => {
                                 <Button 
                                     float='left'
                                     bg_width='100px'
-                                    bg_color={COLOR.red}
-                                    text_color={COLOR.white}
+                                    bg_color={COLOR.white}
+                                    border_color={COLOR.grayDark}
+                                    border_width='1px'
+                                    text_color={COLOR.black}
                                     onTapped={ () => { modalDelete.close() } }>
                                     No
                                 </Button>
                             </Col>
                         </Row>
                     </Modal>
-                </Col>
+
+                </BottomButtonContainer>
+
             </Row>
         </Container>
     )
