@@ -8,6 +8,7 @@ import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
 import { COLOR, DATE, SIZE } from '../../utils/constants.js';
 import { LabelSailecRegular } from '../atoms/label.jsx'
+import FileInput from '../atoms/fileinput.jsx'
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
@@ -26,13 +27,18 @@ import {
 
 import PathIcUser from '../../icons/ic_user.svg';
 import PathIcEdit from '../../icons/ic_edit.svg';
-
+import PathIcEditPencil from '../../icons/ic_edit_pencil.svg';
+import TextButton from '../atoms/textbutton.jsx';
 
 const SVGStyled = styled(SVG)`
-    height: 70px;
+    height: 120px;
     fill: ${COLOR.gray};
     display: block;
     margin: auto;
+`;
+
+const EditPhotoContent = styled.div`
+    display: flex;
 `;
 
 const BottomButtonContainer = styled.div`
@@ -129,12 +135,22 @@ const BodyProfile = () => {
         <Redirect to="/" /> 
         :
         <Container>
-            <Row margin='80px 0 40px 0'>
+            <Row margin='80px 0 60px 0'>
                 <TitleSect>Details</TitleSect>
             </Row>
             <Row margin='40px 0 80px 0'>
                 <Col s={12} m={12} l={3} xl={3}>
                     <SVGStyled src={PathIcUser}></SVGStyled>
+                    <EditPhotoContent>
+                        <TextButton 
+                            ic_path={PathIcEditPencil} 
+                            ic_size='20px'
+                            margin='20px auto'
+                            separation='4px'>
+                            Edit
+                        </TextButton>
+                    </EditPhotoContent>
+                    
                 </Col>
                 <Col s={12} m={12} l={9} xl={9}>
 

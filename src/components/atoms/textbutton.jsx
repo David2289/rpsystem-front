@@ -9,6 +9,7 @@ const AContent = styled.a`
     // To avoid purple padding it's necesary display flex in the content.
     display: flex;
     float: ${props => props.float ? props.float : 'left'}; 
+    margin: ${props => props.margin ? props.margin : '0 0'};
     cursor: pointer;
 `;
 
@@ -71,7 +72,9 @@ const TextButton = (props) => {
                 className='valign-wrapper'
                 href={props.href}
                 target={props.target}
-                float={props.float}>
+                float={props.float}
+                margin={props.margin}
+                onClick={props.onTapped}>
                 { label }
                 { icContent }
             </AContent>
@@ -84,6 +87,7 @@ const TextButton = (props) => {
                 href={props.href}
                 target={props.target}
                 float={props.float}
+                margin={props.margin}
                 onClick={props.onTapped}>
                 { icContent }
                 { label }
@@ -99,6 +103,7 @@ TextButton.propTypes = {
     ic_align: PropTypes.string,
     title_color: PropTypes.string,
     title_size: PropTypes.string,
+    margin: PropTypes.string,
     href: PropTypes.string,
     target: PropTypes.string,
     separation: PropTypes.string,
