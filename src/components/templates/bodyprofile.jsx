@@ -7,8 +7,8 @@ import Row from '../organism/row.jsx';
 import CollectionItem from '../molecules/collectionitem.jsx';
 import SVG from 'react-inlinesvg';
 import { COLOR, DATE, SIZE } from '../../utils/constants.js';
-import { LabelSailecRegular } from '../atoms/label.jsx'
-import FileInput from '../atoms/fileinput.jsx'
+import { LabelSailecRegular } from '../atoms/label.jsx';
+import FormData from 'form-data';
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
 import TitleSect from '../atoms/titlesect.jsx';
@@ -22,6 +22,7 @@ import {
 import { 
     getStudentById, 
     updateStudent, 
+    updateStudentPhoto, 
     removeStudent 
 } from '../../services/studentsService.js';
 
@@ -72,12 +73,14 @@ const BodyProfile = () => {
         'email': '',
         'sex': '',
         'birth': '1999-01-01', //Setting valid initial date to avoid crash.
+        'photo': '',
         'regdate': '',
         'section': '',
         'observation': ''
     });
 
     //* MODALS */
+    const [modalPhoto, setModalPhoto] = useState();
     const [modalNames, setModalNames] = useState();
     const [modalSurnames, setModalSurnames] = useState();
     const [modalBirth, setModalBirth] = useState();
@@ -88,6 +91,7 @@ const BodyProfile = () => {
     const [modalDelete, setModalDelete] = useState();
 
     //* INPUT VALUES */
+    const [photoFile, setPhotoFile] = useState(null);
     const [fnameValue, setFnameValue] = useState({value: ''});
     const [mnameValue, setMnameValue] = useState({value: ''});
     const [lnameValue, setLnameValue] = useState({value: ''});
@@ -101,6 +105,7 @@ const BodyProfile = () => {
     useEffect(() => {
         $(window).on('load', function(){
             // ready method is deprecated
+            setModalPhoto(M.Modal.getInstance($('#modalPhoto')));
             setModalNames(M.Modal.getInstance($('#modalNames')));
             setModalSurnames(M.Modal.getInstance($('#modalSurnames')));
             setModalBirth(M.Modal.getInstance($('#modalBirth')));
@@ -115,15 +120,15 @@ const BodyProfile = () => {
             if (json.error) {
                 console.log(error);
             } else {
-                setStudent(json.data[0]);
-                setFnameValue({value: json.data[0].fname})
-                setMnameValue({value: json.data[0].mname})
-                setLnameValue({value: json.data[0].lname})
-                setFsurnameValue({value: json.data[0].fsurname})
-                setLsurnameValue({value: json.data[0].lsurname})
-                setBirthDate(new Date(json.data[0].birth))
-                setEmailValue({value: json.data[0].email})
-                setObsValue({value: json.data[0].observation})
+                setStudent(json.data);
+                setFnameValue({value: json.data.fname})
+                setMnameValue({value: json.data.mname})
+                setLnameValue({value: json.data.lname})
+                setFsurnameValue({value: json.data.fsurname})
+                setLsurnameValue({value: json.data.lsurname})
+                setBirthDate(new Date(json.data.birth))
+                setEmailValue({value: json.data.email})
+                setObsValue({value: json.data.observation})
             }
         })
     }, [])
@@ -146,9 +151,49 @@ const BodyProfile = () => {
                             ic_path={PathIcEditPencil} 
                             ic_size='20px'
                             margin='20px auto'
-                            separation='4px'>
+                            separation='4px'
+                            onTapped={ () => { modalPhoto.open() } }>
                             Edit
                         </TextButton>
+
+                        <Modal
+                            id="modalPhoto"
+                            header="Photo"
+                            actions={[
+                                <Button 
+                                    bg_color={ COLOR.primary } 
+                                    float='right'
+                                    onTapped={ () => { modalPhoto.close() } }>
+                                    Close
+                                </Button>,
+                                <Button 
+                                    disabled={ !photoFile }
+                                    bg_color={ COLOR.primary } 
+                                    float='right'
+                                    onTapped={ () => { 
+                                        const formdata = new FormData()
+                                        formdata.append('image', photoFile) // 'image' use the same name in multer in the API REST side.
+                                        updateStudentPhoto(id, formdata)
+                                        .then(json => {
+                                            if (!json.error) {
+                                                location.reload();
+                                            }
+                                        })
+                                    } }>
+                                    Update
+                                </Button>
+                            ]}>
+                            <Row margin='40px 0 40px 0'>
+                                <Col s={12}>
+                                    <TextInput 
+                                        id='inputPhoto' 
+                                        type='file' 
+                                        label='File'
+                                        onChange={ (event) => { setPhotoFile(event.target.files[0]) } } />
+                                </Col>
+                            </Row>
+                        </Modal>
+
                     </EditPhotoContent>
                     
                 </Col>

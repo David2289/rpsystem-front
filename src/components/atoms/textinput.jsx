@@ -15,6 +15,7 @@ const TextInput = (props) => {
             <MatTextInput 
                 id={props.id} 
                 type={props.type}
+                label={props.label}
                 placeholder={props.placeholder}
                 value={props.value}
                 onChange={props.onChange} />
@@ -25,6 +26,7 @@ const TextInput = (props) => {
 TextInput.propTypes = {
     id: PropTypes.string,
     type: PropTypes.string,
+    label: PropTypes.string,
     placeholder: PropTypes.string, 
     margin: PropTypes.string, 
     value: PropTypes.string, 

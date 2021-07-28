@@ -16,6 +16,13 @@ export const updateStudent = (id, student) => {
     return axios.post(`http://localhost:3000/api/students/update/${id}`, student);
 }
 
+export const updateStudentPhoto = (id, data) => {
+    const config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    };
+    return axios.post(`http://localhost:3000/api/students/update/${id}/photo`, data, config);
+}
+
 export const removeStudent = (id) => {
     return axios.delete(`http://localhost:3000/api/students/remove/${id}`);
 }
