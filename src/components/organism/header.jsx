@@ -73,58 +73,11 @@ const Header = (props) => {
 
     return (
         <NavbarStyled 
-            alignLinks='right'
+            alignLinks='left'
             brand={logo_dom}
+            centerLogo
             fixed={true}
             menuIcon={burger_dom}>
-
-            <NavItemStyled
-                href='/'
-                selected={initial_selected}>
-                <LabelSailecMedium
-                    text_size={SIZE.body}
-                    text_color={COLOR.secondary}>
-                    {LABEL.initial}
-                </LabelSailecMedium>
-            </NavItemStyled>
-
-            <NavItemStyled
-                href='/service'
-                selected={service_selected}>
-                <LabelSailecMedium
-                    text_size={SIZE.body}
-                    text_color={COLOR.secondary}>
-                    {LABEL.service}
-                </LabelSailecMedium>
-            </NavItemStyled>
-
-            <NavItemStyled
-                href='/nosotros'
-                selected={us_selected}>
-                <LabelSailecMedium
-                    text_size={SIZE.body}
-                    text_color={COLOR.secondary}>
-                    {LABEL.us}
-                </LabelSailecMedium>
-            </NavItemStyled>
-
-            <NavItemStyled>
-                <LabelSailecMedium
-                    text_size={SIZE.body}
-                    text_color={COLOR.secondary}>
-                    Nuestra propuesta
-                </LabelSailecMedium>
-            </NavItemStyled>
-
-            <NavItemStyled
-                href='/contact'
-                selected={contact_selected}>
-                <LabelSailecMedium
-                    text_size={SIZE.body}
-                    text_color={COLOR.secondary}>
-                    {LABEL.contact}
-                </LabelSailecMedium>
-            </NavItemStyled>
 
         </NavbarStyled>
     );
