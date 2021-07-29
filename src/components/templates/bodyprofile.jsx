@@ -38,6 +38,13 @@ const SVGStyled = styled(SVG)`
     margin: auto;
 `;
 
+const ImagePhoto = styled.img`
+    height: 120px;
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+`;
+
 const EditPhotoContent = styled.div`
     display: flex;
 `;
@@ -133,6 +140,14 @@ const BodyProfile = () => {
         })
     }, [])
 
+    const photoLayout = student.photo 
+    ? 
+    <ImagePhoto
+        src={student.photo}/>
+    :
+    <SVGStyled 
+        src={PathIcUser}/>
+
     return(
 
         redirectHome 
@@ -145,7 +160,7 @@ const BodyProfile = () => {
             </Row>
             <Row margin='40px 0 80px 0'>
                 <Col s={12} m={12} l={3} xl={3}>
-                    <SVGStyled src={PathIcUser}></SVGStyled>
+                    {photoLayout}
                     <EditPhotoContent>
                         <TextButton 
                             ic_path={PathIcEditPencil} 
