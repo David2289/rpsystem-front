@@ -22,7 +22,7 @@ const CollectionItem = (props) => {
             <TextButton 
                 ic_path={props.ic_path} 
                 float='right'
-                onTapped={props.onIcTapped}>
+                onClick={props.onIcTapped}>
             </TextButton>
         </TextButtonContent>
         :

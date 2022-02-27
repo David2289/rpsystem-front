@@ -107,7 +107,7 @@ const BodyIndex = () => {
             <Row margin='40px 0 80px 0'>
                 <ButtonContent>
                     <Button 
-                        onTapped={() => { modal.open() }} 
+                        onClick={() => { modal.open() }} 
                         ic_path={PathIcAdd}
                         bg_color={COLOR.primary}
                         text_color={COLOR.black}>
@@ -122,13 +122,13 @@ const BodyIndex = () => {
                     fixedFooter={false} //If true breaks DatePickers
                     actions={[
                     <Button 
-                        onTapped={() => { modal.close() }}
+                        onClick={() => { modal.close() }}
                         bg_color={COLOR.primary}
                         float='right'>
                         Close
                     </Button>,
                     <Button 
-                        onTapped={() => { 
+                        onClick={() => { 
                             submitStudent();
                             modal.close(); 
                         } }

@@ -38,7 +38,7 @@ const Card = (props) => {
 }
 
 Card.propTypes = {
-    ic_path: PropTypes.string.isRequired,
+    ic_path: PropTypes.string,
     title: PropTypes.string,
     title_separation: PropTypes.string,
     descs: PropTypes.arrayOf(string),

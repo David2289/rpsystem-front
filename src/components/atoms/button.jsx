@@ -15,7 +15,7 @@ const ButtonStyled = styled(MatButton)`
     border: ${props => props.border_color ? '1px solid ' + props.border_color : 'none'};
     border-width: ${props => props.border_width ? props.border_width : 'none'};
     svg { fill: ${props => props.text_color ? props.text_color : COLOR.black} }
-    &:hover, &:focus {
+    &:hover {
         background: ${props => props.bg_color 
             ? '#' + lightenColor(props.bg_color.replace('#', ''), 15) 
             : 'none' 
@@ -29,6 +29,9 @@ const ButtonStyled = styled(MatButton)`
             ? '#' + lightenColor(props.text_color.replace('#', ''), 15) 
             : 'none' 
         };
+    }
+    &:focus {
+        background: ${props => props.bg_color ? props.bg_color : 'none'};
     }
 `;
 
@@ -53,7 +56,7 @@ const Button = (props) => {
             id={ props.id }
             className={ props.className }
             disabled={ props.disabled }
-            onClick={ props.onTapped }
+            onClick={ props.onClick }
             margin={ props.margin }
             bg_width={ props.bg_width }
             bg_color={ props.bg_color }
@@ -75,7 +78,7 @@ Button.propTypes = {
     id: PropTypes.string,
     className: PropTypes.string, //Must have className to apply styled component css properties.
     disabled: PropTypes.bool, 
-    onTapped: PropTypes.func,
+    onClick: PropTypes.func,
     ic_path: PropTypes.string,
     bg_width: PropTypes.string, 
     bg_color: PropTypes.string, 

@@ -74,7 +74,7 @@ const TextButton = (props) => {
                 target={props.target}
                 float={props.float}
                 margin={props.margin}
-                onClick={props.onTapped}>
+                onClick={props.onClick}>
                 { label }
                 { icContent }
             </AContent>
@@ -88,7 +88,7 @@ const TextButton = (props) => {
                 target={props.target}
                 float={props.float}
                 margin={props.margin}
-                onClick={props.onTapped}>
+                onClick={props.onClick}>
                 { icContent }
                 { label }
             </AContent>
@@ -108,7 +108,7 @@ TextButton.propTypes = {
     target: PropTypes.string,
     separation: PropTypes.string,
     float: PropTypes.string, 
-    onTapped: PropTypes.func
+    onClick: PropTypes.func
 }
 
 export default TextButton;

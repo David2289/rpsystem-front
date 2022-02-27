@@ -167,7 +167,7 @@ const BodyProfile = () => {
                             ic_size='20px'
                             margin='20px auto'
                             separation='4px'
-                            onTapped={ () => { modalPhoto.open() } }>
+                            onClick={ () => { modalPhoto.open() } }>
                             Edit
                         </TextButton>
 
@@ -178,14 +178,14 @@ const BodyProfile = () => {
                                 <Button 
                                     bg_color={ COLOR.primary } 
                                     float='right'
-                                    onTapped={ () => { modalPhoto.close() } }>
+                                    onClick={ () => { modalPhoto.close() } }>
                                     Close
                                 </Button>,
                                 <Button 
                                     disabled={ !photoFile }
                                     bg_color={ COLOR.primary } 
                                     float='right'
-                                    onTapped={ () => { 
+                                    onClick={ () => { 
                                         const formdata = new FormData()
                                         formdata.append('image', photoFile) // 'image' use the same name in multer in the API REST side.
                                         updateStudentPhoto(id, formdata)
@@ -233,7 +233,7 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalNames.close() } }>
+                                onClick={ () => { modalNames.close() } }>
                                 Close
                             </Button>, 
                             <Button 
@@ -244,7 +244,7 @@ const BodyProfile = () => {
                                 }
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     updateStudent(id, {
                                         fname: fnameValue.value,
                                         mname: mnameValue.value,
@@ -309,7 +309,7 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalSurnames.close() } }>
+                                onClick={ () => { modalSurnames.close() } }>
                                 Close
                             </Button>, 
                             <Button 
@@ -319,7 +319,7 @@ const BodyProfile = () => {
                                 }
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     updateStudent(id, {
                                         fsurname: fsurnameValue.value,
                                         lsurname: lsurnameValue.value
@@ -372,14 +372,14 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalBirth.close() } }>
+                                onClick={ () => { modalBirth.close() } }>
                                 Close
                             </Button>,
                             <Button 
                                 disabled={ false }
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     const selected = getDateStringFromDateString($('#inputBirth')[0].value, 'yyyy-MM-dd');
                                     updateStudent(id, {
                                         birth: selected
@@ -449,14 +449,14 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalEmail.close() } }>
+                                onClick={ () => { modalEmail.close() } }>
                                 Close
                             </Button>,
                             <Button 
                                 disabled={ emailValue.value == student.email }
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     updateStudent(id, {
                                         email: emailValue.value
                                     }).then(json => {
@@ -497,13 +497,13 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalSection.close() } }>
+                                onClick={ () => { modalSection.close() } }>
                                 Close
                             </Button>,
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     updateStudent(id, {
                                         section: $('#selectSection')[0].value ? $('#selectSection')[0].value : ''
                                     }).then(json => {
@@ -548,13 +548,13 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalSex.close() } }>
+                                onClick={ () => { modalSex.close() } }>
                                 Close
                             </Button>,
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     updateStudent(id, {
                                         sex: $('#selectSex')[0].value ? $('#selectSex')[0].value : ''
                                     }).then(json => {
@@ -599,14 +599,14 @@ const BodyProfile = () => {
                             <Button 
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { modalObs.close() } }>
+                                onClick={ () => { modalObs.close() } }>
                                 Close
                             </Button>,
                             <Button 
                                 disabled={ obsValue.value == student.observation }
                                 bg_color={ COLOR.primary } 
                                 float='right'
-                                onTapped={ () => { 
+                                onClick={ () => { 
                                     updateStudent(id, {
                                         observation: $('#inputObs')[0].value ? $('#inputObs')[0].value : ''
                                     }).then(json => {
@@ -639,7 +639,7 @@ const BodyProfile = () => {
                     <BottomButton
                         bg_color={COLOR.red}
                         text_color={COLOR.white}
-                        onTapped={ () => { modalDelete.open() } }>
+                        onClick={ () => { modalDelete.open() } }>
                         Remove
                     </BottomButton>
 
@@ -662,7 +662,7 @@ const BodyProfile = () => {
                                     bg_width='100px'
                                     bg_color={COLOR.red}
                                     text_color={COLOR.white}
-                                    onTapped={ () => { 
+                                    onClick={ () => { 
                                         removeStudent(id)
                                         .then(json => {
                                             if (!json.error) {
@@ -681,7 +681,7 @@ const BodyProfile = () => {
                                     border_color={COLOR.grayDark}
                                     border_width='1px'
                                     text_color={COLOR.black}
-                                    onTapped={ () => { modalDelete.close() } }>
+                                    onClick={ () => { modalDelete.close() } }>
                                     No
                                 </Button>
                             </Col>
