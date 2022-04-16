@@ -8,7 +8,7 @@ import Row from '../organism/row.jsx';
 import TextButton from '../atoms/textbutton.jsx'
 import TextInput from '../atoms/textinput.jsx';
 import TextArea from '../atoms/textarea.jsx';
-import { calculateAge, getDate } from '../../utils/dates.js';
+import { calculateAge, getDateStringFromDateString } from '../../utils/dates.js';
 import { LabelSailecRegular } from '../atoms/label.jsx';
 
 import { getStudents, createStudent } from '../../services/studentsService.js';
@@ -36,7 +36,7 @@ const submitStudent = () => {
         lsurname: $('#lsurname')[0].value ? $('#lsurname')[0].value : '',
         email: $('#email')[0].value ? $('#email')[0].value : '',
         sex: $('#sex')[0].value ? $('#sex')[0].value : '',
-        birth: $('#birth')[0].value ? getDate($('#birth')[0].value, 'yyyy-MM-dd') : '',
+        birth: $('#birth')[0].value ? getDateStringFromDateString($('#birth')[0].value, 'yyyy-MM-dd') : '',
         section: $('#section')[0].value ? $('#section')[0].value : '',
         observation: $('#observation')[0].value ? $('#observation')[0].value : ''
     }
